@@ -1240,6 +1240,62 @@ body {
   pointer-events: none;
 }
 
+/* Score 20 Celebration Banner */
+.game-celebration-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 86%;
+  max-width: 270px;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef08a 50%, #fde047 100%);
+  border: 3.5px solid var(--text-dark);
+  border-radius: 16px;
+  box-shadow: 5px 5px 0 var(--neon-pink), 0 10px 25px rgba(0, 0, 0, 0.25);
+  padding: 16px 14px;
+  text-align: center;
+  z-index: 25;
+  pointer-events: none;
+  animation: celebPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: opacity 0.3s ease;
+}
+
+.game-celebration-badge.hidden {
+  opacity: 0;
+  display: none !important;
+}
+
+@keyframes celebPop {
+  0% { transform: translate(-50%, -50%) scale(0.4) rotate(-5deg); opacity: 0; }
+  70% { transform: translate(-50%, -50%) scale(1.08) rotate(2deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+}
+
+.celeb-stars {
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.celeb-heading {
+  font-family: var(--font-fun);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--neon-pink);
+  text-shadow: 1.5px 1.5px 0 var(--text-dark);
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+}
+
+.celeb-subtext {
+  font-family: var(--font-fun);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #854d0e;
+  margin: 0;
+}
+
 /* Game Preview Start Card Overlay */
 .game-start-preview {
   background-color: rgba(0, 0, 0, 0.28) !important;

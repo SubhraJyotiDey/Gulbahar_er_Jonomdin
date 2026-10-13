@@ -237,6 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameViewGiftBtn = document.getElementById('game-view-gift-btn');
   const memeDismissBtn = document.getElementById('meme-dismiss-btn');
   const memeImageContainer = document.getElementById('meme-image-container');
+  const gameCelebrationBadge = document.getElementById('game-celebration-badge');
+  let winCelebrationTimeout = null;
   
   // Game & Gift States
   let giftCollected = false;
@@ -1073,6 +1075,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let firstTapMade = false;
 
   function resetGame() {
+    if (winCelebrationTimeout) {
+      clearTimeout(winCelebrationTimeout);
+      winCelebrationTimeout = null;
+    }
+    if (gameCelebrationBadge) {
+      gameCelebrationBadge.classList.add('hidden');
+    }
     score = 0;
     gameScoreVal.innerText = score;
     player.y = 180;
@@ -1321,8 +1330,12 @@ document.addEventListener('DOMContentLoaded', () => {
     gCtx.fillText("♪", (noteXOffset + 310) % gameCanvas.width, 180);
     noteXOffset = (noteXOffset - 0.6 + gameCanvas.width) % gameCanvas.width;
 
-    // Apply Player Physics (only after first tap/jump)
-    if (firstTapMade) {
+    // Apply Player Physics
+    if (gameMode === 'celebrating') {
+      // Gentle celebratory hover bobbing, safely floating
+      player.y += Math.sin(Date.now() / 180) * 0.4;
+      player.velocity = 0;
+    } else if (firstTapMade) {
       player.velocity += gravity;
       player.y += player.velocity;
 
@@ -1371,7 +1384,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Easy Mode Collision Check (smaller player hitbox)
-      if (player.x + player.radius - 12 > cloud.x && player.x - player.radius + 12 < cloud.x + cloud.width) {
+      if (gameMode === 'playing' && player.x + player.radius - 12 > cloud.x && player.x - player.radius + 12 < cloud.x + cloud.width) {
         if (player.y - player.radius + 12 < cloud.topHeight || player.y + player.radius - 12 > cloud.bottomY) {
           triggerGameOver();
         }
@@ -1534,6 +1547,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => { if (gameMode === 'idle') renderGamePreviewScene(); }, 150);
 
   function triggerGameOver() {
+    if (gameMode !== 'playing') return;
     gameMode = 'gameover';
     cancelAnimationFrame(gameLoopId);
 
@@ -1567,11 +1581,36 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function checkWinCondition() {
-    // Show win overlay when player hits score 20
+    // Show win celebration when player hits score 20
     if (score >= 20 && !endlessMode && !isWinScreenShown) {
       isWinScreenShown = true;
-      triggerGameWin();
+      triggerCelebrationPhase();
     }
+  }
+
+  function triggerCelebrationPhase() {
+    gameMode = 'celebrating';
+
+    // Confetti celebration for score 20!
+    triggerConfetti(6);
+
+    // Show celebration banner on screen
+    if (gameCelebrationBadge) {
+      gameCelebrationBadge.classList.remove('hidden');
+    }
+
+    // Mascot Alu cheers!
+    if (typeof showAluBubble === 'function') {
+      showAluBubble('সাব্বাস! ২০ পয়েন্ট পার হয়ে গেছে! 🎉🥳🎈', 5000);
+    }
+
+    // The meme image appears after 2 seconds on screen with the collision tune!
+    winCelebrationTimeout = setTimeout(() => {
+      if (gameCelebrationBadge) {
+        gameCelebrationBadge.classList.add('hidden');
+      }
+      triggerGameWin();
+    }, 2000);
   }
 
   function triggerGameWin() {
@@ -1583,7 +1622,7 @@ document.addEventListener('DOMContentLoaded', () => {
       flappyTheme.pause();
     }
 
-    // Play collision sound effect once as requested
+    // Play collision sound effect once as requested right as the image appears
     playFlappyCollisionSound();
 
     // Ensure meme modal and dismiss button are shown
@@ -1594,7 +1633,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (actionBtns) actionBtns.classList.remove('hidden');
 
     gameWinOverlay.classList.remove('hidden');
-    triggerConfetti(6);
+    triggerConfetti(4);
   }
 
   // --- 12. MEME GIFT DISMISSAL & ENDLESS MODE MECHANICS ---
