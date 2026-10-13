@@ -238,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const memeDismissBtn = document.getElementById('meme-dismiss-btn');
   const memeImageContainer = document.getElementById('meme-image-container');
   const gameCelebrationBadge = document.getElementById('game-celebration-badge');
+  const openGiftBtn = document.getElementById('open-gift-btn');
   let winCelebrationTimeout = null;
   
   // Game & Gift States
@@ -1592,25 +1593,17 @@ document.addEventListener('DOMContentLoaded', () => {
     gameMode = 'celebrating';
 
     // Confetti celebration for score 20!
-    triggerConfetti(6);
+    triggerConfetti(8);
 
-    // Show celebration banner on screen
+    // Show celebration banner with Open Gift button on screen
     if (gameCelebrationBadge) {
       gameCelebrationBadge.classList.remove('hidden');
     }
 
-    // Mascot Alu cheers!
+    // Mascot Alu tells user to click to open gift!
     if (typeof showAluBubble === 'function') {
-      showAluBubble('সাব্বাস! ২০ পয়েন্ট পার হয়ে গেছে! 🎉🥳🎈', 5000);
+      showAluBubble("ওয়াও ২০ পয়েন্ট! 🥳 'OPEN GIFT' এ ক্লিক করে গিফটটা দেখো! 🎁✨", 8000);
     }
-
-    // The meme image appears after 2 seconds on screen with the collision tune!
-    winCelebrationTimeout = setTimeout(() => {
-      if (gameCelebrationBadge) {
-        gameCelebrationBadge.classList.add('hidden');
-      }
-      triggerGameWin();
-    }, 2000);
   }
 
   function triggerGameWin() {
@@ -1681,6 +1674,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Hook up button event listeners
+  if (openGiftBtn) {
+    openGiftBtn.addEventListener('click', () => {
+      if (gameCelebrationBadge) {
+        gameCelebrationBadge.classList.add('hidden');
+      }
+      triggerGameWin();
+    });
+  }
   if (memeDismissBtn) {
     memeDismissBtn.addEventListener('click', dismissMemeGift);
   }
