@@ -36,14 +36,14 @@ const defaultConfig = {
   spotifyArtist: "Ishaan x Shuvendu Das Shuvo",
   captions: [],
   captionsBack: [
-    "You are my sunshine on the cloudiest days. ☀️💖",
-    "I cherish every single laugh we share. You are my home. 🏡✨",
-    "This video of you is my favorite thing on the internet! 📹❤️",
-    "Sweetest memory in the world. Forever with you. 🍯👩‍❤️‍👨",
+    "You bring the biggest smiles on the gloomiest days! ☀️✨",
+    "I cherish every single laugh, joke, and memory we share! 🏡✨",
+    "This video of you is genuinely the funniest & cutest thing! 📹✨",
+    "Sweetest memory ever! So glad to have a friend like you. 🍯🤝",
     "You look absolutely stunning. Simply gorgeous! 🌸👑",
-    "Staring into your beautiful eyes is my favorite pastime. 👀💖",
-    "I love you more than words could ever tell. Happy Birthday! 🥇❤️",
-    "Walking under the starry night sky with you is pure magic. 🌌🍃✨"
+    "Your smile brings genuine joy to everyone around you. 🌸✨",
+    "You are genuinely the truest and best friend anyone could ask for. Happy Birthday! 🥇🎉",
+    "Walking under the starry night sky with great company is pure magic. 🌌🍃✨"
   ],
   
   // Game
@@ -51,9 +51,9 @@ const defaultConfig = {
   gameSubtitle: "Reach score 20 to unlock your gift!",
   gameStartTitle: "Flappy Koninika 🎈",
   gameStartDesc: "Tap the screen to fly, dodge the guitars & ukuleles, and collect floating hearts to reach score **20**!",
-  voucherTitle: "The Infinite Wish Pass 👑",
-  voucherDesc: "This golden pass entitles **Koninika** to any 1 unconditional wish, a royal dinner date, unlimited shopping, and endless warm hugs! 🍽️🛍️🫂",
-  voucherSeal: "★ TICKET #KONU-20 • VALID FOR A LIFETIME ❤️ ★",
+  voucherTitle: "The Golden Friendship Pass 👑",
+  voucherDesc: "This golden pass entitles **Koninika** to 1 unconditional favor, an unlimited food & dessert feast, anytime hangouts, and 24/7 listening support! 🍕🎉🤝",
+  voucherSeal: "★ TICKET #KONU-20 • FROM YOUR BEST FRIEND 🤝✨ • VALID FOREVER ★",
   
   // Jar
   jarTitle: "Love Candy Jar",
@@ -1621,7 +1621,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update win subtitle
     const winDesc = document.getElementById('win-desc');
     if (winDesc) {
-      winDesc.innerHTML = "🎉 <strong>Gift Collected!</strong> Endless Mode is unlocked! Keep flying endlessly or restart from score 0!";
+      winDesc.innerHTML = "🎉 <strong>Gift Collected!</strong> Your VIP Friendship Pass is saved! Keep flying endlessly or restart from score 0!";
     }
 
     // Show View Gift button in Game Over screen for future crashes
