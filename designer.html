@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Designer - Koninika's Birthday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Baloo+Da+2:wght@400;500;600;700;800&family=Caveat:wght@400;500;600;700&family=Fredoka:wght@300;400;500;600;700&family=Galada&family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&family=Pacifico&family=Playpen+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="designer.css">
+</head>
+<body>
+
+  <div id="app-layout">
+
+    <!-- ======== TOP TOOLBAR ======== -->
+    <header id="toolbar">
+      <div class="toolbar-logo">🎨 Visual Designer</div>
+
+      <div class="toolbar-group actions">
+        <button id="btn-toggle-preview" class="btn-preview active">👁️ Live Preview</button>
+        <button id="btn-save" class="btn-accent">💾 Save Design</button>
+        <button id="btn-export">📤 Export JSON</button>
+        <button id="btn-import">📥 Import JSON</button>
+        <input type="file" id="import-file" accept=".json" hidden>
+        <button id="btn-clear" class="btn-danger">🗑️ Clear All</button>
+      </div>
+
+      <div class="toolbar-group props">
+        <span class="prop-label">Font</span>
+        <select id="prop-font" title="Font Family">
+          <option value="Fredoka">Fredoka</option>
+          <option value="Caveat">Caveat</option>
+          <option value="Playpen Sans">Playpen Sans</option>
+          <option value="Galada">Galada</option>
+          <option value="Atma">Atma</option>
+          <option value="Baloo Da 2">Baloo Da 2</option>
+          <option value="Hind Siliguri">Hind Siliguri</option>
+          <option value="Pacifico">Pacifico</option>
+          <option value="Outfit">Outfit</option>
+          <option value="Inter">Inter</option>
+        </select>
+
+        <span class="prop-label">Size</span>
+        <input type="range" id="prop-font-size" min="12" max="72" value="24" title="Font Size">
+        <span id="prop-font-size-val">24</span>
+
+        <input type="color" id="prop-color" value="#333333" title="Color">
+
+        <button id="prop-bold" title="Bold"><b>B</b></button>
+        <button id="prop-italic" title="Italic"><i>I</i></button>
+
+        <button id="prop-delete" class="btn-danger" title="Delete Element">🗑️</button>
+      </div>
+    </header>
+
+    <!-- ======== LEFT SIDEBAR ======== -->
+    <aside id="sidebar">
+      <nav class="sidebar-tabs">
+        <button class="tab-btn active" data-panel="panel-text">📝 Text</button>
+        <button class="tab-btn" data-panel="panel-photos">📷 Photos</button>
+        <button class="tab-btn" data-panel="panel-stickers">✨ Stickers</button>
+        <button class="tab-btn" data-panel="panel-shapes">🔷 Shapes</button>
+      </nav>
+
+      <!-- Text Panel -->
+      <section id="panel-text" class="sidebar-panel active">
+        <button id="add-heading" class="add-text-btn">
+          <strong>Add Heading</strong>
+          <span class="preview">Big bold title text</span>
+        </button>
+        <button id="add-subheading" class="add-text-btn">
+          <strong>Add Subheading</strong>
+          <span class="preview">Medium subtitle text</span>
+        </button>
+        <button id="add-body" class="add-text-btn">
+          Add Body Text
+          <span class="preview">Regular paragraph text</span>
+        </button>
+        <button id="add-caption" class="add-text-btn">
+          Add Caption
+          <span class="preview" style="font-style:italic">Small italic caption</span>
+        </button>
+        <button id="add-bengali" class="add-text-btn">
+          Add Bengali Text
+          <span class="preview" style="font-family:'Atma',cursive">আমি তোমায় ভালোবাসি 💖</span>
+        </button>
+      </section>
+
+      <!-- Photos Panel -->
+      <section id="panel-photos" class="sidebar-panel">
+        <div id="photo-grid"></div>
+        <label for="photo-upload" class="upload-btn">📂 Upload Photo</label>
+        <input type="file" id="photo-upload" accept="image/*" hidden>
+      </section>
+
+      <!-- Stickers Panel -->
+      <section id="panel-stickers" class="sidebar-panel">
+        <div class="sticker-grid">
+          <button class="sticker-btn">💖</button>
+          <button class="sticker-btn">⭐</button>
+          <button class="sticker-btn">🎂</button>
+          <button class="sticker-btn">🎈</button>
+          <button class="sticker-btn">🎁</button>
+          <button class="sticker-btn">🌸</button>
+          <button class="sticker-btn">🦋</button>
+          <button class="sticker-btn">🎵</button>
+          <button class="sticker-btn">✨</button>
+          <button class="sticker-btn">💫</button>
+          <button class="sticker-btn">🌈</button>
+          <button class="sticker-btn">🎀</button>
+          <button class="sticker-btn">💝</button>
+          <button class="sticker-btn">🌺</button>
+          <button class="sticker-btn">🎉</button>
+          <button class="sticker-btn">🥳</button>
+          <button class="sticker-btn">💕</button>
+          <button class="sticker-btn">🌟</button>
+          <button class="sticker-btn">🎊</button>
+          <button class="sticker-btn">🍰</button>
+        </div>
+      </section>
+
+      <!-- Shapes Panel -->
+      <section id="panel-shapes" class="sidebar-panel">
+        <div class="shape-grid">
+          <button class="shape-btn" data-shape="rect">⬜ Rectangle</button>
+          <button class="shape-btn" data-shape="circle">⚪ Circle</button>
+          <button class="shape-btn" data-shape="line">➖ Line</button>
+          <button class="shape-btn" data-shape="heart">❤️ Heart</button>
+        </div>
+      </section>
+    </aside>
+
+    <!-- ======== CANVAS AREA ======== -->
+    <section id="canvas-area">
+      <div id="design-canvas">
+        <iframe id="preview-frame" src="index.html" frameborder="0"></iframe>
+        <div id="elements-layer"></div>
+      </div>
+      <div class="canvas-status">Canvas: 412 × 915 px · Samsung Galaxy A-Series · Live Preview ON</div>
+    </section>
+
+  </div>
+
+  <!-- ======== TOAST NOTIFICATION ======== -->
+  <div id="toast"></div>
+
+  <script src="designer.js"></script>
+</body>
+</html>

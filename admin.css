@@ -1,0 +1,323 @@
+/* CMS Portal CSS Stylesheet - Modern Canva Style Dashboard */
+
+:root {
+  --admin-bg: #f3f4f6;
+  --admin-primary: #2E3FE6;
+  --admin-primary-hover: #1b2bc7;
+  --admin-accent: #FF1A75;
+  --admin-accent-hover: #e00b5e;
+  --admin-card-bg: #ffffff;
+  --admin-text-dark: #1f2937;
+  --admin-text-muted: #6b7280;
+  --admin-border: #e5e7eb;
+  --admin-focus: #93c5fd;
+  
+  --font-dashboard: 'Inter', sans-serif;
+  --font-logo: 'Fredoka', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-dashboard);
+  background-color: var(--admin-bg);
+  color: var(--admin-text-dark);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* CMS Dashboard Split Screen Layout */
+#cms-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Left panel: Form editor scroll */
+#cms-dashboard {
+  flex: 1 1 55%;
+  height: 100%;
+  overflow-y: auto;
+  border-right: 2px solid var(--admin-border);
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafb;
+}
+
+.cms-header {
+  padding: 24px 30px;
+  background-color: var(--admin-card-bg);
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.cms-logo {
+  font-family: var(--font-logo);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--admin-primary);
+  margin-bottom: 4px;
+}
+
+.cms-tagline {
+  font-size: 0.88rem;
+  color: var(--admin-text-muted);
+}
+
+.cms-main {
+  padding: 30px;
+  flex: 1;
+}
+
+#cms-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* Card layout (Canva theme) */
+.cms-card {
+  background-color: var(--admin-card-bg);
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--admin-primary);
+  border-bottom: 2px solid #eff6ff;
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.card-desc {
+  font-size: 0.8rem;
+  color: var(--admin-text-muted);
+  line-height: 1.4;
+}
+
+/* Inputs & Labels */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input[type="text"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: var(--font-dashboard);
+  font-size: 0.88rem;
+  color: var(--admin-text-dark);
+  border: 1.5px solid var(--admin-border);
+  border-radius: 8px;
+  outline: none;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--admin-primary);
+  box-shadow: 0 0 0 3px var(--admin-focus);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* Compliments item list styles */
+#compliments-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.compliment-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.compliment-input {
+  flex: 1;
+  padding: 10px 14px;
+  font-family: var(--font-dashboard);
+  font-size: 0.88rem;
+  border: 1.5px solid var(--admin-border);
+  border-radius: 8px;
+  outline: none;
+}
+
+.compliment-input:focus {
+  border-color: var(--admin-primary);
+}
+
+.btn-remove {
+  background-color: #fee2e2;
+  color: #ef4444;
+  border: 1px solid #fca5a5;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: background-color 0.2s;
+}
+
+.btn-remove:hover {
+  background-color: #fca5a5;
+}
+
+/* Button UI */
+.btn-primary {
+  background-color: var(--admin-accent);
+  color: #fff;
+  font-family: var(--font-dashboard);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 26, 117, 0.3);
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+  background-color: var(--admin-accent-hover);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background-color: #f3f4f6;
+  color: #374151;
+  font-family: var(--font-dashboard);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 1.5px solid #d1d5db;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #e5e7eb;
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.btn-group {
+  display: flex;
+  gap: 12px;
+}
+
+.cms-global-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+/* Config code block styles */
+.config-utility textarea {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Right panel: Live Preview */
+#cms-preview-section {
+  flex: 1 1 45%;
+  height: 100%;
+  background-color: var(--admin-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 15px;
+}
+
+.preview-header {
+  width: 100%;
+  max-width: 436px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #4b5563;
+}
+
+.preview-header button {
+  background-color: #fff;
+  border: 1.5px solid #cbd5e1;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.preview-device-frame {
+  width: 436px; /* 412px + 24px device bezel */
+  height: 876px; /* 852px + 24px device bezel */
+  border-radius: 40px;
+  border: 12px solid #1e293b;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
+  background-color: #fff;
+  position: relative;
+}
+
+.preview-device-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Responsive collapse: Hide Iframe split on tablets & mobile screens */
+@media (max-width: 1100px) {
+  #cms-preview-section {
+    display: none; /* Hide device panel */
+  }
+  
+  #cms-dashboard {
+    flex: 1 1 100%;
+    border-right: none;
+  }
+}

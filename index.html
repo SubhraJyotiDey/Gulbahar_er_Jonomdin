@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy 20th Birthday Koninika! 💖</title>
+  <!-- Google Fonts for retro scrapbook and hand-drawn feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atma:wght@600;700&family=Baloo+Da+2:wght@400;700&family=Caveat:wght@700&family=Fredoka:wght@400;700&family=Galada&family=Hind+Siliguri:wght@400;700&family=Inter:wght@400;600&family=Playpen+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Mobile-constrained App Container (Samsung Galaxy A-series optimized) -->
+  <div id="app-container">
+    
+    <!-- Music Controller (Spinning Vinyl Badge) -->
+    <button id="music-btn" class="hidden" aria-label="Toggle Music">
+      <svg class="music-icon" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M12,3V13.55C11.16,13.06 10.11,12.8 9,12.8A5,5 0 0,0 4,17.8A5,5 0 0,0 9,22.8A5,5 0 0,0 14,17.8V7H18V3H12Z" />
+      </svg>
+      <div class="music-pulse"></div>
+    </button>
+
+    <!-- Global Balloon Container -->
+    <div id="balloon-container"></div>
+
+    <!-- Interactive Sparkles Canvas (Lively Touch Effect) -->
+    <canvas id="sparks-canvas"></canvas>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- 1. LOCKED COVER SCREEN (Matches attached design style) -->
+    <section id="cover-page" class="active">
+      <!-- Grid Overlay Background -->
+      <div class="grid-overlay"></div>
+      
+      <!-- Top Decorative Ribbons / Search Bar -->
+      <div class="top-bar">
+        <span class="nav-dot red"></span>
+        <span class="nav-dot yellow"></span>
+        <span class="nav-dot green"></span>
+        <div class="birthday-badge">14.10.2026</div>
+      </div>
+
+      <!-- Organic Blobs & Illustrations -->
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="doodle doodle-flower-1">
+        <svg viewBox="0 0 100 100">
+          <path d="M50,50 C40,30 60,30 50,50 C30,40 30,60 50,50 C60,70 40,70 50,50 C70,60 70,40 50,50" stroke="white" stroke-width="2.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="doodle doodle-flower-2">
+        <svg viewBox="0 0 100 100">
+          <path d="M50,50 C40,30 60,30 50,50 C30,40 30,60 50,50 C60,70 40,70 50,50 C70,60 70,40 50,50" stroke="rgba(255,255,255,0.4)" stroke-width="2.5" fill="none"/>
+        </svg>
+      </div>
+      <div class="doodle doodle-crosses">
+        <span>+</span><span>+</span><span>+</span><br><span>+</span><span>+</span><span>+</span>
+      </div>
+
+      <!-- Hero Content -->
+      <div class="hero-content">
+        <!-- Main Collage Sticker Box -->
+        <div class="sticker-container">
+          <div class="washi-tape cover-tape"></div>
+          <img src="photos of her/540689864_17900363727256380_3030173048801433640_n.webp" alt="Koninika" class="hero-image-sticker">
+          <!-- Animated Party Hat Sticker -->
+          <div class="party-hat-sticker">✨</div>
+          <div class="cutout-sparkle-1">✨</div>
+          <div class="cutout-sparkle-2">💫</div>
+        </div>
+
+        <!-- Canva-style "SWEET 20" Badge sticker -->
+        <div class="sticker-badge sweet-20-badge rotated-left">🎂 SWEET 20</div>
+
+        <!-- Styled retro text "Koninika's Birthday" -->
+        <div class="retro-title-wrapper">
+          <h1 class="retro-title-shadow">Koninika's</h1>
+          <h1 class="retro-title">Koninika's</h1>
+          <h2 class="retro-subtitle-shadow">Birthday</h2>
+          <h2 class="retro-subtitle">Birthday</h2>
+        </div>
+
+        <!-- RSVP / Unlock Button -->
+        <button id="unlock-btn" class="pulse-btn">
+          <span>UNWRAP GIFT 🎁</span>
+        </button>
+      </div>
+
+      <div class="cover-footer">
+        <p>Wednesday, 14th Oct 2026</p>
+      </div>
+    </section>
+
+    <!-- 2. MAIN WEBSITE CONTENT (Scrollable, unlocked) -->
+    <main id="main-content" class="hidden">
+
+      <!-- Navigation tabs (Optimized for 6 tabs) -->
+      <nav class="bottom-nav">
+        <a href="#countdown-sec" class="nav-item active" data-sec="countdown">
+          <span>⏳</span><label>Timer</label>
+        </a>
+        <a href="#scrapbook-sec" class="nav-item" data-sec="scrapbook">
+          <span>📸</span><label>Memory</label>
+        </a>
+        <a href="#game-sec" class="nav-item" data-sec="game">
+          <span>🎮</span><label>Game</label>
+        </a>
+        <a href="#jar-sec" class="nav-item" data-sec="jar">
+          <span>🍬</span><label>Jar</label>
+        </a>
+        <a href="#letter-sec" class="nav-item" data-sec="letter">
+          <span>✉️</span><label>Letter</label>
+        </a>
+        <a href="#cake-sec" class="nav-item" data-sec="cake">
+          <span>🎂</span><label>Cake</label>
+        </a>
+      </nav>
+
+      <!-- SECTIONS WRAPPER -->
+      <div class="scroll-container">
+        
+        <!-- SECTION 1: COUNTDOWN TIMER -->
+        <section id="countdown-sec" class="content-section scroll-snap">
+          <div class="section-decor top-right-blob"></div>
+          <div class="section-decor bottom-left-grid"></div>
+          
+          <h3 class="section-title">Counting Down...</h3>
+          <p class="section-subtitle">to the happiest day of the year!</p>
+
+          <!-- Canva-style Crown Sticker -->
+          <div class="canva-crown-decor">👑</div>
+
+          <div class="timer-container">
+            <div class="timer-box">
+              <span id="days" class="timer-val">00</span>
+              <span class="timer-lbl">Days</span>
+            </div>
+            <div class="timer-box">
+              <span id="hours" class="timer-val">00</span>
+              <span class="timer-lbl">Hours</span>
+            </div>
+            <div class="timer-box">
+              <span id="mins" class="timer-val">00</span>
+              <span class="timer-lbl">Mins</span>
+            </div>
+            <div class="timer-box">
+              <span id="secs" class="timer-val">00</span>
+              <span class="timer-lbl">Secs</span>
+            </div>
+          </div>
+
+          <div class="age-badge">
+            <span class="age-badge-text">💖 Turning 20! 💖</span>
+          </div>
+
+          <div class="countdown-doodle-container">
+            <!-- Cute sticker cutout representing a memory -->
+            <div class="sticker-cutout small-sticker rotation-left">
+              <div class="washi-tape mini-tape"></div>
+              <img src="photos of her/658275412_17925218328256380_2714796768547271920_n.webp" alt="Koninika Memory">
+            </div>
+            <div class="sticker-cutout small-sticker rotation-right">
+              <div class="washi-tape mini-tape-right"></div>
+              <img src="photos of her/658804541_17925218304256380_3820186122590297636_n.webp" alt="Koninika Memory">
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2: INTERACTIVE SCRAPBOOK -->
+        <section id="scrapbook-sec" class="content-section scroll-snap">
+          <h3 class="section-title">Our Scrapbook</h3>
+          <p class="section-subtitle">A collection of beautiful moments 📸</p>
+          
+          <!-- Scrapbook Stack / Swiper -->
+          <div class="scrapbook-wrapper">
+            <div class="scrapbook-track">
+              
+              <!-- Card 1 (3D Flip Polaroid) -->
+              <div class="card-3d-container rotated-left">
+                <div class="polaroid-inner">
+                  <!-- Front -->
+                  <div class="polaroid-front">
+                    <div class="washi-tape top-center-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="card-img-wrapper">
+                      <img src="photos of her/658770840_17925218355256380_114934240232903129_n.webp" alt="Memories">
+                    </div>
+                    <p class="card-caption">That glowing smile... 😍</p>
+                  </div>
+                  <!-- Back -->
+                  <div class="polaroid-back">
+                    <div class="washi-tape top-center-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="back-note-content">
+                      <p class="back-note-text" id="back-caption-0">Loading sweet message...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2 (3D Flip Polaroid) -->
+              <div class="card-3d-container rotated-right">
+                <div class="polaroid-inner">
+                  <!-- Front -->
+                  <div class="polaroid-front">
+                    <div class="washi-tape top-left-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="card-img-wrapper">
+                      <img src="photos of her/560551909_17904207969256380_4514501628863416138_n.webp" alt="Memories">
+                    </div>
+                    <p class="card-caption">Every second with you is a gift ✨</p>
+                  </div>
+                  <!-- Back -->
+                  <div class="polaroid-back">
+                    <div class="washi-tape top-left-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="back-note-content">
+                      <p class="back-note-text" id="back-caption-1">Loading sweet message...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CARD 3: LIVELY SPOTIFY PLAYER CARD (Canva style - Keep Flat) -->
+              <div class="scrapbook-card spotify-card rotated-left">
+                <div class="washi-tape top-center-tape-pink"></div>
+                <div class="card-pin">📌</div>
+                <div class="spotify-header">
+                  <span class="spotify-logo">🟢 Spotify Music</span>
+                </div>
+                <div class="spotify-player-content">
+                  <div class="spotify-disc-wrapper">
+                    <img src="photos of her/540689864_17900363727256380_3030173048801433640_n.webp" class="spotify-album-art" alt="Album Art">
+                    <div class="spotify-disc-center"></div>
+                  </div>
+                  <div class="spotify-track-info">
+                    <h4 class="spotify-track-title">Gulbahar (গুলবাহার)</h4>
+                    <p class="spotify-track-artist">Ishaan x Shuvendu Das Shuvo</p>
+                  </div>
+                </div>
+                <div class="spotify-controls">
+                  <div class="spotify-progress-container">
+                    <span class="spotify-time current-time" id="spotify-time-cur">0:00</span>
+                    <div class="spotify-progress-bar">
+                      <div class="spotify-progress-fill" id="spotify-progress"></div>
+                    </div>
+                    <span class="spotify-time total-time" id="spotify-time-total">5:01</span>
+                  </div>
+                  <button class="spotify-play-btn" id="spotify-widget-play" aria-label="Play Spotify Track">
+                    <svg class="spotify-play-icon" viewBox="0 0 24 24" id="spotify-widget-play-icon">
+                      <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                    </svg>
+                  </button>
+                </div>
+                <div class="sticker-badge spotify-tag">🎵 Our Favorite</div>
+              </div>
+
+              <!-- Card 4 (3D Flip Video Card) -->
+              <div class="card-3d-container rotated-right">
+                <div class="polaroid-inner">
+                  <!-- Front -->
+                  <div class="polaroid-front">
+                    <div class="washi-tape top-center-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="card-img-wrapper">
+                      <video id="scrapbook-video" src="photos of her/AQOzyg2IBIjR-ryRQUiw7jBrQdQxegdJirrjysUuHPXQ_0Q3swi2gKSGYNomuyowHAHXyfpFO9Uh12HSr3Im1eS5o4beSTeYUDB9GcA.mp4" playsinline controls loop></video>
+                    </div>
+                    <p class="card-caption">Captured happiness 🎥❤️</p>
+                  </div>
+                  <!-- Back -->
+                  <div class="polaroid-back">
+                    <div class="washi-tape top-center-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="back-note-content">
+                      <p class="back-note-text" id="back-caption-2">Loading sweet message...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 5 (3D Flip Polaroid) -->
+              <div class="card-3d-container rotated-left">
+                <div class="polaroid-inner">
+                  <!-- Front -->
+                  <div class="polaroid-front">
+                    <div class="washi-tape top-right-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="card-img-wrapper">
+                      <img src="photos of her/621633406_17916172260256380_3081414813452718117_n.webp" alt="Memories">
+                    </div>
+                    <p class="card-caption">The sweetest moments 🍯</p>
+                  </div>
+                  <!-- Back -->
+                  <div class="polaroid-back">
+                    <div class="washi-tape top-right-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="back-note-content">
+                      <p class="back-note-text" id="back-caption-3">Loading sweet message...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 6 (3D Flip Polaroid) -->
+              <div class="card-3d-container rotated-right">
+                <div class="polaroid-inner">
+                  <!-- Front -->
+                  <div class="polaroid-front">
+                    <div class="washi-tape top-center-tape-yellow"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="card-img-wrapper">
+                      <img src="photos of her/559868666_17904207948256380_1472536652549086301_n.webp" alt="Memories">
+                    </div>
+                    <p class="card-caption">Stunning as always 🌸</p>
+                  </div>
+                  <!-- Back -->
+                  <div class="polaroid-back">
+                    <div class="washi-tape top-center-tape-yellow"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="back-note-content">
+                      <p class="back-note-text" id="back-caption-4">Loading sweet message...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 7 (3D Flip Polaroid) -->
+              <div class="card-3d-container rotated-left">
+                <div class="polaroid-inner">
+                  <!-- Front -->
+                  <div class="polaroid-front">
+                    <div class="washi-tape top-left-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="card-img-wrapper">
+                      <img src="photos of her/572099642_17907049935256380_4490085637314270142_n.webp" alt="Memories">
+                    </div>
+                    <p class="card-caption">Staring into your eyes... 👀💖</p>
+                  </div>
+                  <!-- Back -->
+                  <div class="polaroid-back">
+                    <div class="washi-tape top-left-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="back-note-content">
+                      <p class="back-note-text" id="back-caption-5">Loading sweet message...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 8 (3D Flip Polaroid) -->
+              <div class="card-3d-container rotated-right">
+                <div class="polaroid-inner">
+                  <!-- Front -->
+                  <div class="polaroid-front">
+                    <div class="washi-tape top-center-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="card-img-wrapper">
+                      <img src="photos of her/622078047_17916172365256380_4307768692941245159_n.webp" alt="Memories">
+                    </div>
+                    <p class="card-caption">My absolute favorite 🥇❤️</p>
+                  </div>
+                  <!-- Back -->
+                  <div class="polaroid-back">
+                    <div class="washi-tape top-center-tape"></div>
+                    <div class="card-pin">📌</div>
+                    <div class="back-note-content">
+                      <p class="back-note-text" id="back-caption-6">Loading sweet message...</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          
+          <div class="swipe-hint">
+            <span>← Swipe left / right to browse →</span>
+          </div>
+        </section>
+
+        <!-- NEW SECTION 3: "HAPPY JUMP!" MINI GAME -->
+        <section id="game-sec" class="content-section scroll-snap">
+          <h3 class="section-title">Happy Jump! 🎮</h3>
+          <p class="section-subtitle">Reach score 20 to unlock your gift!</p>
+
+          <div class="game-container-box">
+            <!-- Canvas Game Viewport -->
+            <canvas id="game-canvas"></canvas>
+
+            <!-- Score Display -->
+            <div id="game-score-box">Score: <span id="game-score-val">0</span></div>
+
+            <!-- Start Screen Overlay -->
+            <div id="game-start-overlay" class="game-overlay">
+              <div class="washi-tape top-center-tape-yellow"></div>
+              <h4>Flappy Koninika 🎈</h4>
+              <p>Tap the screen to fly, dodge the guitars & ukuleles, and collect floating hearts to reach score **20**!</p>
+              <button id="game-start-btn" class="pulse-btn">START GAME</button>
+            </div>
+
+            <!-- Game Win Screen Overlay (Scratch Card Reward!) -->
+            <div id="game-win-overlay" class="game-overlay hidden">
+              <div class="washi-tape top-center-tape-pink"></div>
+              <h4>✨ YOU WIN! ✨</h4>
+              <p>Happy 20th Birthday! You've unlocked your gift. Scratch below to reveal it! 👇</p>
+              
+              <!-- Gift Scratch Box Embedded -->
+              <div class="scratch-card-container">
+                <!-- Revealed Card Underneath -->
+                <div class="voucher-card">
+                  <div class="voucher-header">🎁 BIRTHDAY VOUCHER 🎁</div>
+                  <div class="voucher-body">
+                    <h4 class="voucher-title">A Day of Spoiling 👑</h4>
+                    <p class="voucher-desc">This voucher entitles **Koninika** to a complete day of whatever she wishes! A candlelit dinner, unlimited shopping, and infinite warm hugs. 🍽️🛍️🫂</p>
+                    <div class="voucher-seal">VALID FOREVER • SIGNED WITH LOVE ❤️</div>
+                  </div>
+                </div>
+
+                <!-- Scratch canvas on top -->
+                <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
+              </div>
+            </div>
+
+            <!-- Game Over Screen Overlay -->
+            <div id="game-over-overlay" class="game-overlay hidden">
+              <div class="washi-tape top-center-tape-pink"></div>
+              <h4>Oops! 🌧️</h4>
+              <p>You bumped into an instrument! Don't worry, try again.</p>
+              <button id="game-restart-btn" class="pulse-btn">TRY AGAIN</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4: INTERACTIVE COMPLIMENT JAR -->
+        <section id="jar-sec" class="content-section scroll-snap">
+          <div class="section-decor top-right-blob"></div>
+          <div class="section-decor bottom-left-grid"></div>
+
+          <h3 class="section-title">Love Candy Jar</h3>
+          <p class="section-subtitle">Tap the jar to pop a sweet reason why I love you! 🍬</p>
+
+          <div class="jar-container">
+            <!-- Glass Jar Mockup -->
+            <div class="love-jar" id="love-jar">
+              <div class="jar-lid"></div>
+              <div class="jar-body">
+                <div class="jar-label">Koninika's Sweets 💖</div>
+                <div class="jar-glass-shine"></div>
+                <!-- Mini candies in jar -->
+                <div class="jar-candy candy-rose"></div>
+                <div class="jar-candy candy-peach"></div>
+                <div class="jar-candy candy-lavender"></div>
+                <div class="jar-candy candy-cream"></div>
+                <div class="jar-candy candy-blue"></div>
+              </div>
+            </div>
+
+            <!-- Speech bubble presenting compliments -->
+            <div class="reason-bubble" id="reason-bubble">
+              <p class="reason-text">Tap the jar to get a sweet reason! 🍬✨</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: SWEET LETTER -->
+        <section id="letter-sec" class="content-section scroll-snap">
+          <h3 class="section-title">My Message</h3>
+          <p class="section-subtitle">A letter written just for you ✉️</p>
+
+          <!-- Interactive Envelope -->
+          <div class="envelope-container">
+            <!-- Washi tape at the top of envelope section -->
+            <div class="washi-tape letter-tape"></div>
+            
+            <div class="envelope-wrapper">
+              <div class="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-paper">
+                  <div class="letter-content">
+                    <h4>Dearest Koninika,</h4>
+                    <p>Happy 20th Birthday! 💖</p>
+                    <p>Today is a beautiful milestone, and I wanted to make something as unique and lovely as you are. Watching you grow, smile, and light up every room you enter is an absolute joy.</p>
+                    <p>You make every day feel like a celebration, and today is all about celebrating YOU. Thank you for being your amazing, kind, and wonderful self.</p>
+                    <p>Here's to 20 years of you spreading joy, and to many, many more shared birthdays, laughs, and beautiful memories. You deserve the absolute world today and always.</p>
+                    <p class="letter-signature">With all my love, <br><span class="signature-name">Your Birthday Boy</span></p>
+                  </div>
+                </div>
+                <div class="envelope-front"></div>
+              </div>
+            </div>
+            <div class="envelope-tap-instruction">
+              <span>Tap the envelope to open 💌</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6: CAKE GAME -->
+        <section id="cake-sec" class="content-section scroll-snap">
+
+          <h3 class="section-title">Make a Wish</h3>
+          <p class="section-subtitle">Tap the candles or blow into mic to blow them out! 🎂</p>
+
+          <div id="mic-status-text" class="mic-status hidden">Blow into your microphone now! 💨</div>
+
+          <!-- Interactive Birthday Cake -->
+          <div class="cake-container">
+
+            <div class="cake">
+              <div class="cake-plate"></div>
+              
+              <!-- Bottom Layer -->
+              <div class="cake-bottom">
+                <div class="sprinkle sp1"></div>
+                <div class="sprinkle sp2"></div>
+                <div class="sprinkle sp3"></div>
+                <div class="sprinkle sp4"></div>
+              </div>
+              
+              <!-- Top Layer -->
+              <div class="cake-top">
+                <div class="sprinkle sp5"></div>
+                <div class="sprinkle sp6"></div>
+                <div class="sprinkle sp7"></div>
+                <div class="strawberry s1">🍓</div>
+                <div class="strawberry s2">🍓</div>
+              </div>
+              
+              <div class="cake-cream">
+                <div class="cream-drip d1"></div>
+                <div class="cream-drip d2"></div>
+                <div class="cream-drip d3"></div>
+              </div>
+              
+              <!-- Glowing Candles -->
+              <div class="candle-container">
+                
+                <!-- Candle 1 -->
+                <div class="candle" id="candle-1" data-lit="true">
+                  <div class="candle-wick"></div>
+                  <div class="candle-flame"></div>
+                  <div class="smoke"></div>
+                </div>
+
+                <!-- Candle 2 -->
+                <div class="candle" id="candle-2" data-lit="true">
+                  <div class="candle-wick"></div>
+                  <div class="candle-flame"></div>
+                  <div class="smoke"></div>
+                </div>
+
+                <!-- Candle 3 -->
+                <div class="candle" id="candle-3" data-lit="true">
+                  <div class="candle-wick"></div>
+                  <div class="candle-flame"></div>
+                  <div class="smoke"></div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Sweets Reveal Area (hidden until candles blown) -->
+          <div id="sweets-reveal" class="sweets-reveal">
+            <div class="sweets-gradient"></div>
+            <img src="sweets.png" alt="Bengali Sweets" class="sweets-image">
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Cute SVG Mascot "Alu" the Bear -->
+    <!-- Cute SVG Mascot "Alu" the Bear (sitting chibi style) -->
+    <div id="alu-container" class="state-happy">
+      <div id="alu-bubble">হাই! আমি আলু, তোমার বার্থডে গাইড! 🎁</div>
+      <svg id="alu-svg" viewBox="0 0 100 100" width="85" height="85">
+        <!-- Body Elements (Behind Head) -->
+        <!-- Tail -->
+        <circle cx="28" cy="76" r="6" fill="#cf6a28" stroke="#43210f" stroke-width="2.5" />
+        
+        <!-- Back Legs (Splayed sitting paws) -->
+        <path d="M 20,80 C 15,80 15,92 25,92 C 32,92 35,84 32,78 Z" fill="#cf6a28" stroke="#43210f" stroke-width="2.5" />
+        <ellipse cx="23" cy="87" rx="5.5" ry="4.5" fill="#fbf6eb" />
+        <circle cx="17" cy="82" r="1.5" fill="#fbf6eb" />
+        <circle cx="21" cy="79" r="1.5" fill="#fbf6eb" />
+        <circle cx="26" cy="80" r="1.5" fill="#fbf6eb" />
+        
+        <path d="M 80,80 C 85,80 85,92 75,92 C 68,92 65,84 68,78 Z" fill="#cf6a28" stroke="#43210f" stroke-width="2.5" />
+        <ellipse cx="77" cy="87" rx="5.5" ry="4.5" fill="#fbf6eb" />
+        <circle cx="83" cy="82" r="1.5" fill="#fbf6eb" />
+        <circle cx="79" cy="79" r="1.5" fill="#fbf6eb" />
+        <circle cx="74" cy="80" r="1.5" fill="#fbf6eb" />
+
+        <!-- Front Body & Chest Patch -->
+        <path d="M 33,65 C 33,65 31,88 38,92 L 62,92 C 69,88 67,65 67,65 Z" fill="#cf6a28" stroke="#43210f" stroke-width="2.5" />
+        <path d="M 42,65 C 42,65 41,86 45,88 L 55,88 C 59,86 58,65 58,65 Z" fill="#fbf6eb" />
+
+        <!-- Front Paw Left -->
+        <path d="M 35,74 C 33,84 36,92 42,92 C 46,92 47,84 45,74 Z" fill="#cf6a28" stroke="#43210f" stroke-width="2.5" />
+        <path d="M 37,92 L 37,88 M 40,92 L 40,88" stroke="#43210f" stroke-width="2" stroke-linecap="round" />
+
+        <!-- Front Paw Right -->
+        <path d="M 65,74 C 67,84 64,92 58,92 C 54,92 53,84 55,74 Z" fill="#cf6a28" stroke="#43210f" stroke-width="2.5" />
+        <path d="M 63,92 L 63,88 M 60,92 L 60,88" stroke="#43210f" stroke-width="2" stroke-linecap="round" />
+
+        <!-- Left Ear -->
+        <circle cx="24" cy="24" r="13" fill="#cf6a28" stroke="#43210f" stroke-width="2.5" />
+        <circle cx="24" cy="24" r="8" fill="#ff9aa2" stroke="#43210f" stroke-width="1.5" />
+        
+        <!-- Right Ear -->
+        <circle cx="76" cy="22" r="13" fill="#cf6a28" stroke="#43210f" stroke-width="2.5" />
+        <circle cx="76" cy="22" r="8" fill="#ff9aa2" stroke="#43210f" stroke-width="1.5" />
+
+        <!-- Head Outline (Chubby cheeks and hair tufts on top) -->
+        <path d="M 44,22 C 45,16 48,16 49,21 C 51,16 54,16 55,21 C 58,19 61,21 62,23 C 74,25 79,35 78,48 C 76,62 65,65 50,65 C 35,65 24,62 22,48 C 21,35 26,25 38,23 C 39,21 42,19 44,22 Z" fill="#cf6a28" stroke="#43210f" stroke-width="2.8" />
+
+        <!-- Muzzle/Snout -->
+        <ellipse cx="50" cy="51" rx="8.5" ry="6.5" fill="#fbf6eb" stroke="#43210f" stroke-width="1.8" />
+        <ellipse cx="50" cy="47.5" rx="3.5" ry="2.2" fill="#43210f" />
+
+        <!-- Blushes -->
+        <ellipse cx="30" cy="52" rx="5" ry="3.5" fill="#ff9aa2" opacity="0.75" />
+        <ellipse cx="70" cy="51" rx="5" ry="3.5" fill="#ff9aa2" opacity="0.75" />
+
+        <!-- Default Eyes (Shiny winking chibi eye) -->
+        <g class="eyes-default">
+          <ellipse cx="37" cy="44" rx="4.5" ry="5.5" fill="#43210f" />
+          <circle cx="38.5" cy="41.5" r="1.8" fill="#ffffff" />
+          <circle cx="35.5" cy="45.5" r="0.9" fill="#ffffff" />
+          <path d="M 58,45 Q 63,40 68,45" fill="none" stroke="#43210f" stroke-width="3" stroke-linecap="round" />
+        </g>
+        
+        <!-- Happy Eyes -->
+        <g class="eyes-happy">
+          <ellipse cx="37" cy="44" rx="4.5" ry="5.5" fill="#43210f" />
+          <circle cx="38.5" cy="41.5" r="1.8" fill="#ffffff" />
+          <circle cx="35.5" cy="45.5" r="0.9" fill="#ffffff" />
+          <path d="M 57,44 Q 62,39 67,44" fill="none" stroke="#43210f" stroke-width="3" stroke-linecap="round" />
+        </g>
+        
+        <!-- Heart Eyes -->
+        <g class="eyes-heart">
+          <path d="M37,44 c-2,-2 -4.5,0 -4.5,2.5 c0,3.5 4.5,6 4.5,6 s4.5,-2.5 4.5,-6 c0,-2.5 -2.5,-2.5 -4.5,0 z" fill="#ff4d6d" stroke="#c9184a" stroke-width="1" />
+          <path d="M63,44 c-2,-2 -4.5,0 -4.5,2.5 c0,3.5 4.5,6 4.5,6 s4.5,-2.5 4.5,-6 c0,-2.5 -2.5,-2.5 -4.5,0 z" fill="#ff4d6d" stroke="#c9184a" stroke-width="1" />
+        </g>
+        
+        <!-- Sad/Crying Eyes -->
+        <g class="eyes-sad">
+          <path d="M 33,41 L 41,47 M 33,47 L 41,41" fill="none" stroke="#43210f" stroke-width="3.5" stroke-linecap="round" />
+          <path d="M 59,41 L 67,47 M 59,47 L 67,41" fill="none" stroke="#43210f" stroke-width="3.5" stroke-linecap="round" />
+        </g>
+        
+        <!-- Gamer/Star Eyes -->
+        <g class="eyes-gamer">
+          <polygon points="37,39 39,42 43,43 40,45 41,48 37,46 33,48 34,45 31,43 35,42" fill="#ffcc00" stroke="#d4af37" stroke-width="0.5" />
+          <polygon points="63,39 65,42 69,43 66,45 67,48 63,46 59,48 60,45 57,43 61,42" fill="#ffcc00" stroke="#d4af37" stroke-width="0.5" />
+        </g>
+        
+        <!-- Shy Eyes -->
+        <g class="eyes-shy">
+          <path d="M 32,45 Q 37,40 42,45" fill="none" stroke="#43210f" stroke-width="3" stroke-linecap="round" />
+          <path d="M 58,45 Q 63,40 68,45" fill="none" stroke="#43210f" stroke-width="3" stroke-linecap="round" />
+        </g>
+
+        <!-- MOUTHS -->
+        <!-- Happy Mouth -->
+        <g class="mouth-happy">
+          <path d="M 47,51 Q 50,56 53,51 Z" fill="#ff9aa2" stroke="#43210f" stroke-width="1.8" stroke-linejoin="round" />
+        </g>
+        
+        <!-- Open Mouth -->
+        <g class="mouth-open">
+          <ellipse cx="50" cy="53" rx="2.5" ry="3.5" fill="#43210f" />
+        </g>
+        
+        <!-- Sad Mouth -->
+        <g class="mouth-sad">
+          <path d="M 46,54 Q 50,50 54,54" fill="none" stroke="#43210f" stroke-width="2.2" stroke-linecap="round" />
+        </g>
+        
+        <!-- Shy Mouth -->
+        <g class="mouth-shy">
+          <line x1="47" y1="52" x2="53" y2="52" stroke="#43210f" stroke-width="2.2" stroke-linecap="round" />
+        </g>
+        
+        <!-- Tears -->
+        <g class="tears-anim">
+          <path d="M 37,47 L 37,60" fill="none" stroke="#3a86ff" stroke-width="3" stroke-linecap="round" />
+          <circle cx="37" cy="60" r="3.2" fill="#3a86ff" />
+          <path d="M 63,47 L 63,60" fill="none" stroke="#3a86ff" stroke-width="3" stroke-linecap="round" />
+          <circle cx="63" cy="60" r="3.2" fill="#3a86ff" />
+        </g>
+      </svg>
+    </div>
+
+  </div>
+
+  <!-- Background music tag -->
+  <audio id="bg-music" loop preload="auto">
+  </audio>
+
+  <!-- Birthday instrumental that plays on cake section -->
+  <audio id="birthday-instrumental" loop preload="auto">
+    <source src="HAPPY BIRTHDAY TO YOU _ PIANO INSTRUMENTAL _ BEST HAPPY BITHDAY MUSIC 2021.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="app.js"></script>
+</body>
+</html>

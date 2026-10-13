@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS Portal - Koninika's Birthday Website 🛠️</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- CMS Container -->
+  <div id="cms-container">
+    
+    <!-- Left Dashboard Sidebar -->
+    <div id="cms-dashboard">
+      <header class="cms-header">
+        <div class="cms-logo">🎨 CMS Portal</div>
+        <p class="cms-tagline">Customize Koninika's Birthday Site Content, Fonts, & Games</p>
+      </header>
+
+      <main class="cms-main">
+        <!-- Form -->
+        <form id="cms-form">
+          
+          <!-- TAB SECTION: FONTS -->
+          <div class="cms-card">
+            <h3 class="card-title">✨ Typography & Fonts (Select for every line/area)</h3>
+            
+            <div class="form-group">
+              <label for="font-hero-title">1. Cover Main Title ("Koninika's"):</label>
+              <select id="font-hero-title" name="heroTitleFont">
+                <option value="'Fredoka', sans-serif">Fredoka (English Fun)</option>
+                <option value="'Galada', cursive">Galada (Calligraphy / Bengali)</option>
+                <option value="'Atma', cursive">Atma (Playful Bubble / Bengali)</option>
+                <option value="'Pacifico', cursive">Pacifico (Retro Script / English)</option>
+                <option value="'Outfit', sans-serif">Outfit (Clean Modern)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-hero-subtitle">2. Cover Subtitle ("Birthday"):</label>
+              <select id="font-hero-subtitle" name="heroSubtitleFont">
+                <option value="'Fredoka', sans-serif">Fredoka (English Fun)</option>
+                <option value="'Galada', cursive">Galada (Calligraphy / Bengali)</option>
+                <option value="'Atma', cursive">Atma (Playful Bubble / Bengali)</option>
+                <option value="'Pacifico', cursive">Pacifico (Retro Script / English)</option>
+                <option value="'Outfit', sans-serif">Outfit (Clean Modern)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-section-header">3. Section Main Headers (All Titles):</label>
+              <select id="font-section-header" name="sectionHeaderFont">
+                <option value="'Fredoka', sans-serif">Fredoka (English Fun)</option>
+                <option value="'Galada', cursive">Galada (Calligraphy / Bengali)</option>
+                <option value="'Atma', cursive">Atma (Playful Bubble / Bengali)</option>
+                <option value="'Pacifico', cursive">Pacifico (Retro Script / English)</option>
+                <option value="'Outfit', sans-serif">Outfit (Clean Modern)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-caption">4. Polaroid Photo Captions:</label>
+              <select id="font-caption" name="polaroidCaptionFont">
+                <option value="'Caveat', cursive">Caveat (Cursive / English & Bengali)</option>
+                <option value="'Playpen Sans', sans-serif">Playpen Sans (Casual Handwritten / English)</option>
+                <option value="'Baloo Da 2', sans-serif">Baloo Da 2 (Soft Rounded / Bengali)</option>
+                <option value="'Hind Siliguri', sans-serif">Hind Siliguri (Clean Sans / Bengali)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-spotify">5. Spotify Track Info & Badges:</label>
+              <select id="font-spotify" name="spotifyFont">
+                <option value="'Fredoka', sans-serif">Fredoka (English Fun)</option>
+                <option value="'Playpen Sans', sans-serif">Playpen Sans (Handwritten / English)</option>
+                <option value="'Inter', sans-serif">Inter (Modern Sans)</option>
+                <option value="'Baloo Da 2', sans-serif">Baloo Da 2 (Rounded / Bengali)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-game">6. Game Start & Over Screen overlays:</label>
+              <select id="font-game" name="gameFont">
+                <option value="'Playpen Sans', sans-serif">Playpen Sans (Casual / English)</option>
+                <option value="'Inter', sans-serif">Inter (Modern Sans)</option>
+                <option value="'Baloo Da 2', sans-serif">Baloo Da 2 (Rounded / Bengali)</option>
+                <option value="'Hind Siliguri', sans-serif">Hind Siliguri (Clean Sans / Bengali)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-voucher">7. Scratch Card Gift Voucher text:</label>
+              <select id="font-voucher" name="voucherFont">
+                <option value="'Playpen Sans', sans-serif">Playpen Sans (English Default)</option>
+                <option value="'Fredoka', sans-serif">Fredoka (English Fun)</option>
+                <option value="'Baloo Da 2', sans-serif">Baloo Da 2 (Soft Rounded / Bengali)</option>
+                <option value="'Hind Siliguri', sans-serif">Hind Siliguri (Clean Sans / Bengali)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-jar-label">8. Candy Jar Label sticker:</label>
+              <select id="font-jar-label" name="jarLabelFont">
+                <option value="'Caveat', cursive">Caveat (Elegant Cursive)</option>
+                <option value="'Playpen Sans', sans-serif">Playpen Sans (Casual)</option>
+                <option value="'Atma', cursive">Atma (Playful Bubble / Bengali)</option>
+                <option value="'Galada', cursive">Galada (Calligraphy / Bengali)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-jar-bubble">9. Compliments Candy Pop Bubble text:</label>
+              <select id="font-jar-bubble" name="jarBubbleFont">
+                <option value="'Caveat', cursive">Caveat (Elegant Cursive)</option>
+                <option value="'Playpen Sans', sans-serif">Playpen Sans (Casual)</option>
+                <option value="'Baloo Da 2', sans-serif">Baloo Da 2 (Soft Rounded / Bengali)</option>
+                <option value="'Hind Siliguri', sans-serif">Hind Siliguri (Clean Sans / Bengali)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-letter-salutation">10. Love Letter Salutation ("Dearest..."):</label>
+              <select id="font-letter-salutation" name="letterSalutationFont">
+                <option value="'Caveat', cursive">Caveat (Cursive)</option>
+                <option value="'Playpen Sans', sans-serif">Playpen Sans (Handwritten)</option>
+                <option value="'Galada', cursive">Galada (Calligraphy / Bengali)</option>
+                <option value="'Atma', cursive">Atma (Bubble / Bengali)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-letter-body">11. Love Letter Body paragraphs:</label>
+              <select id="font-letter-body" name="letterBodyFont">
+                <option value="'Playpen Sans', sans-serif">Playpen Sans (Casual / English)</option>
+                <option value="'Caveat', cursive">Caveat (Cursive)</option>
+                <option value="'Baloo Da 2', sans-serif">Baloo Da 2 (Soft Rounded / Bengali)</option>
+                <option value="'Hind Siliguri', sans-serif">Hind Siliguri (Clean Sans / Bengali)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-letter-sig">12. Love Letter Signature ("With love..."):</label>
+              <select id="font-letter-sig" name="letterSignatureFont">
+                <option value="'Caveat', cursive">Caveat (Cursive)</option>
+                <option value="'Playpen Sans', sans-serif">Playpen Sans (Handwritten)</option>
+                <option value="'Galada', cursive">Galada (Calligraphy / Bengali)</option>
+                <option value="'Atma', cursive">Atma (Bubble / Bengali)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="font-wish">13. Secret Wish Card (Cake Win overlay):</label>
+              <select id="font-wish" name="wishCardFont">
+                <option value="'Fredoka', sans-serif">Fredoka (English Fun)</option>
+                <option value="'Playpen Sans', sans-serif">Playpen Sans (Casual)</option>
+                <option value="'Baloo Da 2', sans-serif">Baloo Da 2 (Soft Rounded / Bengali)</option>
+                <option value="'Hind Siliguri', sans-serif">Hind Siliguri (Clean Sans / Bengali)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- TAB SECTION: COVER PAGE -->
+          <div class="cms-card">
+            <h3 class="card-title">🎫 Cover / Landing Page</h3>
+            <div class="form-group">
+              <label for="hero-title">Hero Title First Word (Yellow):</label>
+              <input type="text" id="hero-title" name="heroTitle">
+            </div>
+            <div class="form-group">
+              <label for="hero-subtitle">Hero Subtitle Second Word (White):</label>
+              <input type="text" id="hero-subtitle" name="heroSubtitle">
+            </div>
+            <div class="form-group">
+              <label for="hero-badge">Badge Text (Top-Right):</label>
+              <input type="text" id="hero-badge" name="heroBadge">
+            </div>
+            <div class="form-group">
+              <label for="hero-footer">Footer Text (Date info):</label>
+              <input type="text" id="hero-footer" name="heroFooter">
+            </div>
+          </div>
+
+          <!-- TAB SECTION: TIMER & COUNTDOWN -->
+          <div class="cms-card">
+            <h3 class="card-title">⏳ Countdown Timer</h3>
+            <div class="form-group">
+              <label for="target-date">Target Date (Format: Month DD, YYYY HH:MM:SS):</label>
+              <input type="text" id="target-date" name="targetDate" placeholder="October 14, 2026 00:00:00">
+            </div>
+            <div class="form-group">
+              <label for="countdown-title">Countdown Header Title:</label>
+              <input type="text" id="countdown-title" name="countdownTitle">
+            </div>
+            <div class="form-group">
+              <label for="countdown-subtitle">Countdown Subtitle Label:</label>
+              <input type="text" id="countdown-subtitle" name="countdownSubtitle">
+            </div>
+            <div class="form-group">
+              <label for="countdown-age">Age/Milestone Badge text:</label>
+              <input type="text" id="countdown-age" name="countdownAge">
+            </div>
+          </div>
+
+          <!-- TAB SECTION: SCRAPBOOK CAPTIONS -->
+          <div class="cms-card">
+            <h3 class="card-title">📸 Scrapbook & Spotify Widget</h3>
+            <div class="form-group">
+              <label for="scrapbook-title">Scrapbook Section Title:</label>
+              <input type="text" id="scrapbook-title" name="scrapbookTitle">
+            </div>
+            <div class="form-group">
+              <label for="scrapbook-subtitle">Scrapbook Section Subtitle:</label>
+              <input type="text" id="scrapbook-subtitle" name="scrapbookSubtitle">
+            </div>
+            <div class="form-group">
+              <label for="caption-0">Photo 1 Caption (Front):</label>
+              <input type="text" id="caption-0" class="caption-input">
+              <label for="back-caption-0-in" class="desc-label" style="font-size: 0.78rem; opacity: 0.8;">Photo 1 Love Note (Back of card):</label>
+              <input type="text" id="back-caption-0-in" class="caption-back-input">
+            </div>
+            <div class="form-group">
+              <label for="caption-1">Photo 2 Caption (Front):</label>
+              <input type="text" id="caption-1" class="caption-input">
+              <label for="back-caption-1-in" class="desc-label" style="font-size: 0.78rem; opacity: 0.8;">Photo 2 Love Note (Back of card):</label>
+              <input type="text" id="back-caption-1-in" class="caption-back-input">
+            </div>
+            <div class="form-group">
+              <label for="spotify-title">Spotify Track Title:</label>
+              <input type="text" id="spotify-title" name="spotifyTitle">
+            </div>
+            <div class="form-group">
+              <label for="spotify-artist">Spotify Track Artist Name:</label>
+              <input type="text" id="spotify-artist" name="spotifyArtist">
+            </div>
+            <div class="form-group">
+              <label for="caption-2">Video 3 Caption (Front):</label>
+              <input type="text" id="caption-2" class="caption-input">
+              <label for="back-caption-2-in" class="desc-label" style="font-size: 0.78rem; opacity: 0.8;">Video 3 Love Note (Back of card):</label>
+              <input type="text" id="back-caption-2-in" class="caption-back-input">
+            </div>
+            <div class="form-group">
+              <label for="caption-3">Photo 4 Caption (Front):</label>
+              <input type="text" id="caption-3" class="caption-input">
+              <label for="back-caption-3-in" class="desc-label" style="font-size: 0.78rem; opacity: 0.8;">Photo 4 Love Note (Back of card):</label>
+              <input type="text" id="back-caption-3-in" class="caption-back-input">
+            </div>
+            <div class="form-group">
+              <label for="caption-4">Photo 5 Caption (Front):</label>
+              <input type="text" id="caption-4" class="caption-input">
+              <label for="back-caption-4-in" class="desc-label" style="font-size: 0.78rem; opacity: 0.8;">Photo 5 Love Note (Back of card):</label>
+              <input type="text" id="back-caption-4-in" class="caption-back-input">
+            </div>
+            <div class="form-group">
+              <label for="caption-5">Photo 6 Caption (Front):</label>
+              <input type="text" id="caption-5" class="caption-input">
+              <label for="back-caption-5-in" class="desc-label" style="font-size: 0.78rem; opacity: 0.8;">Photo 6 Love Note (Back of card):</label>
+              <input type="text" id="back-caption-5-in" class="caption-back-input">
+            </div>
+            <div class="form-group">
+              <label for="caption-6">Photo 7 Caption (Front):</label>
+              <input type="text" id="caption-6" class="caption-input">
+              <label for="back-caption-6-in" class="desc-label" style="font-size: 0.78rem; opacity: 0.8;">Photo 7 Love Note (Back of card):</label>
+              <input type="text" id="back-caption-6-in" class="caption-back-input">
+            </div>
+          </div>
+
+          <!-- TAB SECTION: HAPPY JUMP GAME -->
+          <div class="cms-card">
+            <h3 class="card-title">🎮 "Happy Jump!" Game & Voucher prize</h3>
+            <div class="form-group">
+              <label for="game-title">Game Section Title:</label>
+              <input type="text" id="game-title" name="gameTitle">
+            </div>
+            <div class="form-group">
+              <label for="game-subtitle">Game Section Subtitle:</label>
+              <input type="text" id="game-subtitle" name="gameSubtitle">
+            </div>
+            <div class="form-group">
+              <label for="game-start-title">Start Screen Game Title:</label>
+              <input type="text" id="game-start-title" name="gameStartTitle">
+            </div>
+            <div class="form-group">
+              <label for="game-start-desc">Start Screen Rules/Desc:</label>
+              <textarea id="game-start-desc" name="gameStartDesc" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="voucher-title">Win Voucher Title:</label>
+              <input type="text" id="voucher-title" name="voucherTitle">
+            </div>
+            <div class="form-group">
+              <label for="voucher-desc">Win Voucher Prize Description:</label>
+              <textarea id="voucher-desc" name="voucherDesc" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="voucher-seal">Win Voucher Stamp/Seal Text:</label>
+              <input type="text" id="voucher-seal" name="voucherSeal">
+            </div>
+          </div>
+
+          <!-- TAB SECTION: CANDY JAR -->
+          <div class="cms-card">
+            <h3 class="card-title">🍬 Love Candy Jar Compliments</h3>
+            <div class="form-group">
+              <label for="jar-title">Jar Section Title:</label>
+              <input type="text" id="jar-title" name="jarTitle">
+            </div>
+            <div class="form-group">
+              <label for="jar-subtitle">Jar Section Subtitle:</label>
+              <input type="text" id="jar-subtitle" name="jarSubtitle">
+            </div>
+            <div class="form-group">
+              <label for="jar-label">Jar Sticker Label Text:</label>
+              <input type="text" id="jar-label" name="jarLabel">
+            </div>
+
+            <!-- Compliment List Manager -->
+            <div class="form-group">
+              <label>Manage Compliments List (Add or Edit Bengali/English texts):</label>
+              <div id="compliments-list-container">
+                <!-- Dynamically populated list -->
+              </div>
+              <button type="button" class="btn-secondary" id="add-compliment-btn">+ Add Reason</button>
+            </div>
+          </div>
+
+          <!-- TAB SECTION: LOVE LETTER -->
+          <div class="cms-card">
+            <h3 class="card-title">✉️ Handwritten Love Letter</h3>
+            <div class="form-group">
+              <label for="letter-title">Letter Section Title:</label>
+              <input type="text" id="letter-title" name="letterTitle">
+            </div>
+            <div class="form-group">
+              <label for="letter-subtitle">Letter Section Subtitle:</label>
+              <input type="text" id="letter-subtitle" name="letterSubtitle">
+            </div>
+            <div class="form-group">
+              <label for="letter-header">Letter Salutation (e.g. Dearest X):</label>
+              <input type="text" id="letter-header" name="letterHeader">
+            </div>
+            <div class="form-group">
+              <label for="letter-body">Letter Body Message (Use Enter for paragraphs):</label>
+              <textarea id="letter-body" name="letterBody" rows="7"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="letter-signature">Letter Signature (e.g. Love, Y):</label>
+              <textarea id="letter-signature" name="letterSignature" rows="2"></textarea>
+            </div>
+          </div>
+
+          <!-- TAB SECTION: CAKE -->
+          <div class="cms-card">
+            <h3 class="card-title">🎂 Cake & Wish Card</h3>
+            <div class="form-group">
+              <label for="cake-title">Cake Section Title:</label>
+              <input type="text" id="cake-title" name="cakeTitle">
+            </div>
+            <div class="form-group">
+              <label for="cake-subtitle">Cake Section Subtitle:</label>
+              <input type="text" id="cake-subtitle" name="cakeSubtitle">
+            </div>
+            <div class="form-group">
+              <label for="wish-title">Secret Wish Card Title:</label>
+              <input type="text" id="wish-title" name="wishTitle">
+            </div>
+            <div class="form-group">
+              <label for="wish-text">Secret Wish Text Message:</label>
+              <textarea id="wish-text" name="wishText" rows="4"></textarea>
+            </div>
+          </div>
+
+          <!-- CMS GLOBAL ACTIONS -->
+          <div class="cms-global-actions">
+            <button type="submit" class="btn-primary" id="save-btn">💾 Save All Changes</button>
+            <button type="button" class="btn-secondary" id="reset-btn">🔄 Reset Defaults</button>
+          </div>
+
+          <!-- EXPORT/IMPORT CODE UTILITIES (Making changes permanent) -->
+          <div class="cms-card config-utility">
+            <h3 class="card-title">🔌 Backup & Permanent Deploy Utility</h3>
+            <p class="card-desc">To make your edits permanent (even if the browser cache gets cleared), click **Export Config**, copy the code box, and click **Save**. You can also paste an exported configuration here to import it.</p>
+            <textarea id="config-code-box" rows="5" placeholder="Configuration JSON code will appear here..."></textarea>
+            <div class="btn-group">
+              <button type="button" class="btn-secondary" id="export-config-btn">📤 Export Config</button>
+              <button type="button" class="btn-secondary" id="import-config-btn">📥 Import Config</button>
+            </div>
+          </div>
+
+        </form>
+      </main>
+    </div>
+
+    <!-- Right Live Mobile Preview Iframe (Samsung aspect ratio mockup) -->
+    <div id="cms-preview-section">
+      <div class="preview-header">
+        <span>Samsung Galaxy A-Series Live Preview</span>
+        <button id="refresh-preview-btn">🔄 Refresh</button>
+      </div>
+      <div class="preview-device-frame">
+        <iframe id="preview-iframe" src="index.html"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
