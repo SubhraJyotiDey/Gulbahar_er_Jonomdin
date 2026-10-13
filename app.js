@@ -29,20 +29,12 @@ const defaultConfig = {
   countdownSubtitle: "to the happiest day of the year!",
   countdownAge: "💖 Turning 20! 💖",
   
-  // Scrapbook
-  scrapbookTitle: "Our Scrapbook",
+  // Scrapbook / Good Moments
+  scrapbookTitle: "Good Moments",
   scrapbookSubtitle: "A collection of beautiful moments 📸",
   spotifyTitle: "Gulbahar (গুলবাহার)",
   spotifyArtist: "Ishaan x Shuvendu Das Shuvo",
-  captions: [
-    "That glowing smile... 😍",
-    "Every second with you is a gift ✨",
-    "Captured happiness 🎥❤️", // (For the video card)
-    "The sweetest moments 🍯",
-    "Stunning as always 🌸",
-    "Staring into your eyes... 👀💖",
-    "My absolute favorite 🥇❤️"
-  ],
+  captions: [],
   captionsBack: [
     "You are my sunshine on the cloudiest days. ☀️💖",
     "I cherish every single laugh we share. You are my home. 🏡✨",
@@ -135,14 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.spotify-track-title').innerText = config.spotifyTitle;
     document.querySelector('.spotify-track-artist').innerText = config.spotifyArtist;
 
-    // Polaroid Captions (Front & Back)
-    const frontCaptions = document.querySelectorAll('.polaroid-front .card-caption');
-    frontCaptions.forEach((el, index) => {
-      if (config.captions && config.captions[index]) {
-        el.innerText = config.captions[index];
-      }
-    });
-
+    // Back Captions for 3D flip notes
     const backCaptions = document.querySelectorAll('.polaroid-back .back-note-text');
     backCaptions.forEach((el, index) => {
       if (config.captionsBack && config.captionsBack[index]) {
@@ -151,45 +136,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Game Section
-    document.querySelector('#game-sec .section-title').innerText = config.gameTitle;
-    document.querySelector('#game-sec .section-subtitle').innerText = config.gameSubtitle;
-    document.querySelector('#game-start-overlay h4').innerText = config.gameStartTitle;
-    document.querySelector('#game-start-overlay p').innerText = config.gameStartDesc;
-    document.querySelector('.voucher-title').innerText = config.voucherTitle;
-    document.querySelector('.voucher-desc').innerText = config.voucherDesc;
-    document.querySelector('.voucher-seal').innerText = config.voucherSeal;
+    if (document.querySelector('#game-sec')) {
+      document.querySelector('#game-sec .section-title').innerText = config.gameTitle;
+      document.querySelector('#game-sec .section-subtitle').innerText = config.gameSubtitle;
+      const startH4 = document.querySelector('#game-start-overlay h4');
+      if (startH4) startH4.innerText = config.gameStartTitle || "Happy Jump! 🎈";
+      const startP = document.querySelector('#game-start-overlay p');
+      if (startP) startP.innerText = config.gameStartDesc || "Tap to fly, dodge the guitars & ukuleles, and collect hearts!";
+      const vTitle = document.querySelector('.voucher-title');
+      if (vTitle) vTitle.innerText = config.voucherTitle;
+      const vDesc = document.querySelector('.voucher-desc');
+      if (vDesc) vDesc.innerText = config.voucherDesc;
+      const vSeal = document.querySelector('.voucher-seal');
+      if (vSeal) vSeal.innerText = config.voucherSeal;
+    }
 
-    // Candy Jar Section
-    document.querySelector('#jar-sec .section-title').innerText = config.jarTitle;
-    document.querySelector('#jar-sec .section-subtitle').innerText = config.jarSubtitle;
-    document.querySelector('.jar-label').innerText = config.jarLabel;
+    // Candy Jar Section (if present)
+    if (document.querySelector('#jar-sec')) {
+      document.querySelector('#jar-sec .section-title').innerText = config.jarTitle;
+      document.querySelector('#jar-sec .section-subtitle').innerText = config.jarSubtitle;
+      const jLab = document.querySelector('.jar-label');
+      if (jLab) jLab.innerText = config.jarLabel;
+    }
 
-    // Letter Section
-    document.querySelector('#letter-sec .section-title').innerText = config.letterTitle;
-    document.querySelector('#letter-sec .section-subtitle').innerText = config.letterSubtitle;
-    
-    // Build letter dynamically with paragraph elements
-    const letterContent = document.querySelector('.letter-content');
-    letterContent.innerHTML = '';
-    
-    const h4 = document.createElement('h4');
-    h4.innerText = config.letterHeader;
-    letterContent.appendChild(h4);
+    // Letter Section (if present)
+    if (document.querySelector('#letter-sec')) {
+      document.querySelector('#letter-sec .section-title').innerText = config.letterTitle;
+      document.querySelector('#letter-sec .section-subtitle').innerText = config.letterSubtitle;
+      const letterContent = document.querySelector('.letter-content');
+      if (letterContent) {
+        letterContent.innerHTML = '';
+        const h4 = document.createElement('h4');
+        h4.innerText = config.letterHeader;
+        letterContent.appendChild(h4);
 
-    const paragraphs = config.letterBody.split('\n');
-    paragraphs.forEach(pText => {
-      if (pText.trim() !== '') {
-        const p = document.createElement('p');
-        p.innerText = pText.trim();
-        letterContent.appendChild(p);
+        const paragraphs = config.letterBody.split('\n');
+        paragraphs.forEach(pText => {
+          if (pText.trim() !== '') {
+            const p = document.createElement('p');
+            p.innerText = pText.trim();
+            letterContent.appendChild(p);
+          }
+        });
+
+        const signature = document.createElement('p');
+        signature.className = 'letter-signature';
+        const sigLines = config.letterSignature.split('\n');
+        signature.innerHTML = `${sigLines[0]} <br><span class="signature-name">${sigLines[1] || ''}</span>`;
+        letterContent.appendChild(signature);
       }
-    });
-
-    const signature = document.createElement('p');
-    signature.className = 'letter-signature';
-    const sigLines = config.letterSignature.split('\n');
-    signature.innerHTML = `${sigLines[0]} <br><span class="signature-name">${sigLines[1] || ''}</span>`;
-    letterContent.appendChild(signature);
+    }
 
     // Cake Section
     document.querySelector('#cake-sec .section-title').innerText = config.cakeTitle;
@@ -238,10 +234,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const scratchCanvas = document.getElementById('scratch-canvas');
   const scrCtx = scratchCanvas.getContext('2d');
 
-  // Love Jar Elements
+  // Love Jar Elements (if present)
   const loveJar = document.getElementById('love-jar');
   const reasonBubble = document.getElementById('reason-bubble');
-  const reasonText = reasonBubble.querySelector('.reason-text');
+  const reasonText = reasonBubble ? reasonBubble.querySelector('.reason-text') : null;
 
   // Set up background music path safely
   bgMusic.src = "Gulbahar _ গুলবাহার _ Ishaan এর Gaan _ Shuvendu Das Shuvo _ Official Music Video.mp3";
@@ -542,9 +538,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 6. INTERACTIVE ENVELOPE OPENING ---
   const envelopeWrapper = document.querySelector('.envelope-wrapper');
-  envelopeWrapper.addEventListener('click', () => {
-    envelopeWrapper.classList.toggle('open');
-  });
+  if (envelopeWrapper) {
+    envelopeWrapper.addEventListener('click', () => {
+      envelopeWrapper.classList.toggle('open');
+    });
+  }
 
   // --- 7. CAKE BLOWING GAME (TOUCH + MIC BLOWING) ---
   const candles = document.querySelectorAll('.candle');
@@ -1016,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let gameMode = 'idle'; // idle, playing, gameover, win
   let score = 0;
   let gravity = 0.34;
-  let player = { x: 60, y: 180, radius: 20, velocity: 0, jump: -6.0 };
+  let player = { x: 60, y: 180, radius: 26, velocity: 0, jump: -6.0 };
   let clouds = [];
   let items = [];
   let cloudTimer = 0;
@@ -1062,6 +1060,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   gameStartBtn.addEventListener('click', startGame);
+  const gamePreviewCard = document.querySelector('.game-preview-card');
+  if (gamePreviewCard) {
+    gamePreviewCard.addEventListener('click', startGame);
+  }
   gameRestartBtn.addEventListener('click', startGame);
 
   let noteXOffset = 400; // Drifting background musical notes
@@ -1294,8 +1296,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Easy Mode Collision Check (smaller player hitbox)
-      if (player.x + player.radius - 8 > cloud.x && player.x - player.radius + 8 < cloud.x + cloud.width) {
-        if (player.y - player.radius + 8 < cloud.topHeight || player.y + player.radius - 8 > cloud.bottomY) {
+      if (player.x + player.radius - 12 > cloud.x && player.x - player.radius + 12 < cloud.x + cloud.width) {
+        if (player.y - player.radius + 12 < cloud.topHeight || player.y + player.radius - 12 > cloud.bottomY) {
           triggerGameOver();
         }
       }
@@ -1330,13 +1332,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Draw Player Circular Avatar
+    // Draw Player Circular Avatar (Crop centered square to protect 1:1 natural aspect ratio)
     gCtx.save();
     gCtx.beginPath();
     gCtx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
     gCtx.clip();
-    if (playerImg.complete) {
-      gCtx.drawImage(playerImg, player.x - player.radius, player.y - player.radius, player.radius * 2, player.radius * 2);
+    if (playerImg.complete && playerImg.width > 0) {
+      const minDim = Math.min(playerImg.width, playerImg.height);
+      const sx = (playerImg.width - minDim) / 2;
+      const sy = (playerImg.height - minDim) / 2;
+      gCtx.drawImage(
+        playerImg,
+        sx, sy, minDim, minDim,
+        player.x - player.radius, player.y - player.radius, player.radius * 2, player.radius * 2
+      );
     } else {
       gCtx.fillStyle = "#FFB3C6";
       gCtx.fill();
@@ -1345,7 +1354,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Draw cute black outlines on player circle
     gCtx.strokeStyle = varColorHex('--text-dark');
-    gCtx.lineWidth = 3;
+    gCtx.lineWidth = 3.5;
     gCtx.beginPath();
     gCtx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
     gCtx.stroke();
@@ -1356,21 +1365,98 @@ document.addEventListener('DOMContentLoaded', () => {
     gCtx.strokeStyle = "#FFFDF9";
     gCtx.lineWidth = 2;
     gCtx.beginPath();
-    gCtx.moveTo(player.x - 12, player.y - player.radius + 2);
-    gCtx.lineTo(player.x + 12, player.y - player.radius + 2);
-    gCtx.lineTo(player.x, player.y - player.radius - 20); // Tip
+    gCtx.moveTo(player.x - 14, player.y - player.radius + 3);
+    gCtx.lineTo(player.x + 14, player.y - player.radius + 3);
+    gCtx.lineTo(player.x, player.y - player.radius - 22); // Tip
     gCtx.closePath();
     gCtx.fill();
     gCtx.stroke();
     // Pom pom on top of hat
     gCtx.fillStyle = "#FFD23F";
     gCtx.beginPath();
-    gCtx.arc(player.x, player.y - player.radius - 22, 5, 0, Math.PI * 2);
+    gCtx.arc(player.x, player.y - player.radius - 24, 6, 0, Math.PI * 2);
     gCtx.fill();
     gCtx.restore();
 
     gameLoopId = requestAnimationFrame(gameLoop);
   }
+
+  // Pre-render the game world background scene so it is visible behind the preview card thumbnail
+  function renderGamePreviewScene() {
+    if (!gCtx) return;
+    gCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+    
+    // Warm Musical Peach Background
+    gCtx.fillStyle = "#fff4e6"; 
+    gCtx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+    // Drifting musical notes
+    gCtx.fillStyle = "rgba(183, 105, 53, 0.16)"; 
+    gCtx.font = "26px 'Fredoka', sans-serif";
+    gCtx.fillText("♪", 40, 90);
+    gCtx.fillText("♫", 160, 240);
+    gCtx.fillText("♬", 270, 75);
+    gCtx.fillText("♩", 100, 320);
+    gCtx.fillText("♪", 290, 195);
+
+    // Preview Acoustic Guitar & Ukulele
+    drawSVGInstrument(gCtx, 270, 80, 0.95, 10 * Math.PI / 180, 'guitar', true);
+    drawSVGInstrument(gCtx, 270, 260, 0.95, -10 * Math.PI / 180, 'ukulele', false);
+
+    // Preview Heart
+    gCtx.font = "24px sans-serif";
+    gCtx.fillText("💖", 175, 185);
+
+    // Preview Player Avatar (Radius 26, non-squished)
+    const prevX = 75;
+    const prevY = 190;
+    const prevR = 26;
+
+    gCtx.save();
+    gCtx.beginPath();
+    gCtx.arc(prevX, prevY, prevR, 0, Math.PI * 2);
+    gCtx.clip();
+    if (playerImg.complete && playerImg.width > 0) {
+      const minDim = Math.min(playerImg.width, playerImg.height);
+      const sx = (playerImg.width - minDim) / 2;
+      const sy = (playerImg.height - minDim) / 2;
+      gCtx.drawImage(playerImg, sx, sy, minDim, minDim, prevX - prevR, prevY - prevR, prevR * 2, prevR * 2);
+    } else {
+      gCtx.fillStyle = "#FFB3C6";
+      gCtx.fill();
+    }
+    gCtx.restore();
+
+    // Outline
+    gCtx.strokeStyle = varColorHex('--text-dark');
+    gCtx.lineWidth = 3.5;
+    gCtx.beginPath();
+    gCtx.arc(prevX, prevY, prevR, 0, Math.PI * 2);
+    gCtx.stroke();
+
+    // Party hat
+    gCtx.save();
+    gCtx.fillStyle = "#FF1A75";
+    gCtx.strokeStyle = "#FFFDF9";
+    gCtx.lineWidth = 2;
+    gCtx.beginPath();
+    gCtx.moveTo(prevX - 14, prevY - prevR + 3);
+    gCtx.lineTo(prevX + 14, prevY - prevR + 3);
+    gCtx.lineTo(prevX, prevY - prevR - 22);
+    gCtx.closePath();
+    gCtx.fill();
+    gCtx.stroke();
+    // Pom pom
+    gCtx.fillStyle = "#FFD23F";
+    gCtx.beginPath();
+    gCtx.arc(prevX, prevY - prevR - 24, 6, 0, Math.PI * 2);
+    gCtx.fill();
+    gCtx.restore();
+  }
+
+  // Draw the preview scene immediately when images load
+  playerImg.onload = () => { if (gameMode === 'idle') renderGamePreviewScene(); };
+  setTimeout(() => { if (gameMode === 'idle') renderGamePreviewScene(); }, 150);
 
   function triggerGameOver() {
     gameMode = 'gameover';
@@ -1493,25 +1579,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let lastIndex = -1;
 
-  loveJar.addEventListener('click', () => {
-    // Shake jar animation
-    loveJar.classList.add('jar-shake');
-    setTimeout(() => loveJar.classList.remove('jar-shake'), 400);
+  if (loveJar) {
+    loveJar.addEventListener('click', () => {
+      // Shake jar animation
+      loveJar.classList.add('jar-shake');
+      setTimeout(() => loveJar.classList.remove('jar-shake'), 400);
 
-    // Confetti pop
-    const jarRect = loveJar.getBoundingClientRect();
-    spawnLocalConfetti(jarRect.left + jarRect.width/2, jarRect.top, pastelColors[Math.floor(Math.random() * pastelColors.length)]);
+      // Confetti pop
+      const jarRect = loveJar.getBoundingClientRect();
+      spawnLocalConfetti(jarRect.left + jarRect.width/2, jarRect.top, pastelColors[Math.floor(Math.random() * pastelColors.length)]);
 
-    // Display random compliment without repeats
-    let index = Math.floor(Math.random() * compliments.length);
-    while (index === lastIndex) {
-      index = Math.floor(Math.random() * compliments.length);
-    }
-    lastIndex = index;
+      // Display random compliment without repeats
+      let index = Math.floor(Math.random() * compliments.length);
+      while (index === lastIndex) {
+        index = Math.floor(Math.random() * compliments.length);
+      }
+      lastIndex = index;
 
-    reasonText.innerText = compliments[index];
-    reasonBubble.classList.add('reveal');
-  });
+      if (reasonText) reasonText.innerText = compliments[index];
+      if (reasonBubble) reasonBubble.classList.add('reveal');
+    });
+  }
 
   // --- 14. INTERSECTION OBSERVER FOR BOTTOM NAV HIGHLIGHTS ---
   const observerOptions = {
@@ -1578,20 +1666,12 @@ document.addEventListener('DOMContentLoaded', () => {
       emote: 'thinking'
     },
     'scrapbook-sec': {
-      text: "উফফ, কী মিষ্টি সব ছবি আর স্মৃতি! দেখে নাও! 💖",
+      text: "আমাদের মিষ্টি সব মুহূর্ত আর ছবি! দেখে নাও! 💖",
       emote: 'heart'
     },
     'game-sec': {
       text: "চলো খেলি! ট্যাপ করে আমাকে ওড়াও! খুব সহজ! 🎮",
       emote: 'gamer'
-    },
-    'jar-sec': {
-      text: "বয়ামে ট্যাপ করে মিষ্টি কথার চকলেট নাও! 🍬",
-      emote: 'thinking'
-    },
-    'letter-sec': {
-      text: "তোমার জন্য লেখা চিঠি! খামটি খোলো! 💌",
-      emote: 'shy'
     },
     'cake-sec': {
       text: "ফুঁ দিয়ে বা ট্যাপ করে মোমবাতিগুলো নেভাও! 🎂",

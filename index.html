@@ -99,22 +99,16 @@
     <!-- 2. MAIN WEBSITE CONTENT (Scrollable, unlocked) -->
     <main id="main-content" class="hidden">
 
-      <!-- Navigation tabs (Optimized for 6 tabs) -->
+      <!-- Navigation tabs (Optimized for 4 tabs) -->
       <nav class="bottom-nav">
         <a href="#countdown-sec" class="nav-item active" data-sec="countdown">
           <span>⏳</span><label>Timer</label>
         </a>
         <a href="#scrapbook-sec" class="nav-item" data-sec="scrapbook">
-          <span>📸</span><label>Memory</label>
+          <span>📸</span><label>Good Moments</label>
         </a>
         <a href="#game-sec" class="nav-item" data-sec="game">
           <span>🎮</span><label>Game</label>
-        </a>
-        <a href="#jar-sec" class="nav-item" data-sec="jar">
-          <span>🍬</span><label>Jar</label>
-        </a>
-        <a href="#letter-sec" class="nav-item" data-sec="letter">
-          <span>✉️</span><label>Letter</label>
         </a>
         <a href="#cake-sec" class="nav-item" data-sec="cake">
           <span>🎂</span><label>Cake</label>
@@ -171,9 +165,9 @@
           </div>
         </section>
 
-        <!-- SECTION 2: INTERACTIVE SCRAPBOOK -->
+        <!-- SECTION 2: GOOD MOMENTS -->
         <section id="scrapbook-sec" class="content-section scroll-snap">
-          <h3 class="section-title">Our Scrapbook</h3>
+          <h3 class="section-title">Good Moments</h3>
           <p class="section-subtitle">A collection of beautiful moments 📸</p>
           
           <!-- Scrapbook Stack / Swiper -->
@@ -190,7 +184,6 @@
                     <div class="card-img-wrapper">
                       <img src="photos of her/658770840_17925218355256380_114934240232903129_n.webp" alt="Memories">
                     </div>
-                    <p class="card-caption">That glowing smile... 😍</p>
                   </div>
                   <!-- Back -->
                   <div class="polaroid-back">
@@ -213,7 +206,6 @@
                     <div class="card-img-wrapper">
                       <img src="photos of her/560551909_17904207969256380_4514501628863416138_n.webp" alt="Memories">
                     </div>
-                    <p class="card-caption">Every second with you is a gift ✨</p>
                   </div>
                   <!-- Back -->
                   <div class="polaroid-back">
@@ -270,7 +262,6 @@
                     <div class="card-img-wrapper">
                       <video id="scrapbook-video" src="photos of her/AQOzyg2IBIjR-ryRQUiw7jBrQdQxegdJirrjysUuHPXQ_0Q3swi2gKSGYNomuyowHAHXyfpFO9Uh12HSr3Im1eS5o4beSTeYUDB9GcA.mp4" playsinline controls loop></video>
                     </div>
-                    <p class="card-caption">Captured happiness 🎥❤️</p>
                   </div>
                   <!-- Back -->
                   <div class="polaroid-back">
@@ -293,7 +284,6 @@
                     <div class="card-img-wrapper">
                       <img src="photos of her/621633406_17916172260256380_3081414813452718117_n.webp" alt="Memories">
                     </div>
-                    <p class="card-caption">The sweetest moments 🍯</p>
                   </div>
                   <!-- Back -->
                   <div class="polaroid-back">
@@ -316,7 +306,6 @@
                     <div class="card-img-wrapper">
                       <img src="photos of her/559868666_17904207948256380_1472536652549086301_n.webp" alt="Memories">
                     </div>
-                    <p class="card-caption">Stunning as always 🌸</p>
                   </div>
                   <!-- Back -->
                   <div class="polaroid-back">
@@ -339,7 +328,6 @@
                     <div class="card-img-wrapper">
                       <img src="photos of her/572099642_17907049935256380_4490085637314270142_n.webp" alt="Memories">
                     </div>
-                    <p class="card-caption">Staring into your eyes... 👀💖</p>
                   </div>
                   <!-- Back -->
                   <div class="polaroid-back">
@@ -362,7 +350,6 @@
                     <div class="card-img-wrapper">
                       <img src="photos of her/622078047_17916172365256380_4307768692941245159_n.webp" alt="Memories">
                     </div>
-                    <p class="card-caption">My absolute favorite 🥇❤️</p>
                   </div>
                   <!-- Back -->
                   <div class="polaroid-back">
@@ -395,12 +382,19 @@
             <!-- Score Display -->
             <div id="game-score-box">Score: <span id="game-score-val">0</span></div>
 
-            <!-- Start Screen Overlay -->
-            <div id="game-start-overlay" class="game-overlay">
-              <div class="washi-tape top-center-tape-yellow"></div>
-              <h4>Flappy Koninika 🎈</h4>
-              <p>Tap the screen to fly, dodge the guitars & ukuleles, and collect floating hearts to reach score **20**!</p>
-              <button id="game-start-btn" class="pulse-btn">START GAME</button>
+            <!-- Start Screen Preview Card / Overlay -->
+            <div id="game-start-overlay" class="game-overlay game-start-preview">
+              <div class="game-preview-card">
+                <div class="washi-tape top-center-tape-yellow"></div>
+                <div class="game-preview-avatar-circle">
+                  <img src="photos of her/avatar_surprised.png" alt="Player">
+                  <div class="preview-mini-hat">🎉</div>
+                </div>
+                <h4>Happy Jump! 🎈</h4>
+                <p>Tap to fly, dodge the acoustic guitars & ukuleles, and collect hearts to reach score **20**!</p>
+                <div class="preview-target-badge">🎯 Goal: Score 20</div>
+                <button id="game-start-btn" class="pulse-btn">▶ START GAME</button>
+              </div>
             </div>
 
             <!-- Game Win Screen Overlay (Scratch Card Reward!) -->
@@ -432,69 +426,6 @@
               <h4>Oops! 🌧️</h4>
               <p>You bumped into an instrument! Don't worry, try again.</p>
               <button id="game-restart-btn" class="pulse-btn">TRY AGAIN</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- SECTION 4: INTERACTIVE COMPLIMENT JAR -->
-        <section id="jar-sec" class="content-section scroll-snap">
-          <div class="section-decor top-right-blob"></div>
-          <div class="section-decor bottom-left-grid"></div>
-
-          <h3 class="section-title">Love Candy Jar</h3>
-          <p class="section-subtitle">Tap the jar to pop a sweet reason why I love you! 🍬</p>
-
-          <div class="jar-container">
-            <!-- Glass Jar Mockup -->
-            <div class="love-jar" id="love-jar">
-              <div class="jar-lid"></div>
-              <div class="jar-body">
-                <div class="jar-label">Koninika's Sweets 💖</div>
-                <div class="jar-glass-shine"></div>
-                <!-- Mini candies in jar -->
-                <div class="jar-candy candy-rose"></div>
-                <div class="jar-candy candy-peach"></div>
-                <div class="jar-candy candy-lavender"></div>
-                <div class="jar-candy candy-cream"></div>
-                <div class="jar-candy candy-blue"></div>
-              </div>
-            </div>
-
-            <!-- Speech bubble presenting compliments -->
-            <div class="reason-bubble" id="reason-bubble">
-              <p class="reason-text">Tap the jar to get a sweet reason! 🍬✨</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- SECTION 5: SWEET LETTER -->
-        <section id="letter-sec" class="content-section scroll-snap">
-          <h3 class="section-title">My Message</h3>
-          <p class="section-subtitle">A letter written just for you ✉️</p>
-
-          <!-- Interactive Envelope -->
-          <div class="envelope-container">
-            <!-- Washi tape at the top of envelope section -->
-            <div class="washi-tape letter-tape"></div>
-            
-            <div class="envelope-wrapper">
-              <div class="envelope">
-                <div class="envelope-flap"></div>
-                <div class="envelope-paper">
-                  <div class="letter-content">
-                    <h4>Dearest Koninika,</h4>
-                    <p>Happy 20th Birthday! 💖</p>
-                    <p>Today is a beautiful milestone, and I wanted to make something as unique and lovely as you are. Watching you grow, smile, and light up every room you enter is an absolute joy.</p>
-                    <p>You make every day feel like a celebration, and today is all about celebrating YOU. Thank you for being your amazing, kind, and wonderful self.</p>
-                    <p>Here's to 20 years of you spreading joy, and to many, many more shared birthdays, laughs, and beautiful memories. You deserve the absolute world today and always.</p>
-                    <p class="letter-signature">With all my love, <br><span class="signature-name">Your Birthday Boy</span></p>
-                  </div>
-                </div>
-                <div class="envelope-front"></div>
-              </div>
-            </div>
-            <div class="envelope-tap-instruction">
-              <span>Tap the envelope to open 💌</span>
             </div>
           </div>
         </section>

@@ -958,11 +958,12 @@ body {
 
 .card-img-wrapper {
   width: 100%;
-  height: 220px;
+  height: 255px;
   background-color: #eaeaea;
   overflow: hidden;
   border: 1px solid rgba(0,0,0,0.05);
   position: relative;
+  border-radius: 4px;
 }
 
 .card-img-wrapper img, .card-img-wrapper video {
@@ -1237,6 +1238,85 @@ body {
 .game-overlay.hidden {
   opacity: 0;
   pointer-events: none;
+}
+
+/* Game Preview Start Card Overlay */
+.game-start-preview {
+  background-color: rgba(0, 0, 0, 0.28) !important;
+  backdrop-filter: blur(1.5px) !important;
+  padding: 12px !important;
+}
+
+.game-preview-card {
+  background-color: var(--cream-white);
+  border: 3.5px solid var(--text-dark);
+  box-shadow: 6px 6px 0 var(--bright-yellow);
+  border-radius: 16px;
+  padding: 16px 14px 14px 14px;
+  width: 90%;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  animation: float-gentle 3s ease-in-out infinite;
+}
+
+.game-preview-avatar-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid var(--text-dark);
+  box-shadow: 3px 3px 0 var(--neon-pink);
+  overflow: hidden;
+  position: relative;
+  background-color: #fff4e6;
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+
+.game-preview-avatar-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-mini-hat {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  font-size: 1.1rem;
+}
+
+.game-preview-card h4 {
+  font-family: var(--font-fun);
+  font-size: 1.25rem;
+  color: var(--neon-pink);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.game-preview-card p {
+  font-size: 0.76rem;
+  line-height: 1.35;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  max-width: 240px;
+}
+
+.preview-target-badge {
+  background: var(--bright-yellow);
+  color: var(--text-dark);
+  font-family: var(--font-fun);
+  font-weight: 700;
+  font-size: 0.72rem;
+  padding: 3px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--text-dark);
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 0 var(--text-dark);
 }
 
 /* Win Screen Scratch Card Container overrides */
