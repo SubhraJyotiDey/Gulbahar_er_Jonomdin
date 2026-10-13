@@ -42,7 +42,8 @@ const defaultConfig = {
     "Sweetest memory in the world. Forever with you. 🍯👩‍❤️‍👨",
     "You look absolutely stunning. Simply gorgeous! 🌸👑",
     "Staring into your beautiful eyes is my favorite pastime. 👀💖",
-    "I love you more than words could ever tell. Happy Birthday! 🥇❤️"
+    "I love you more than words could ever tell. Happy Birthday! 🥇❤️",
+    "Walking under the starry night sky with you is pure magic. 🌌🍃✨"
   ],
   
   // Game
@@ -132,6 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
     backCaptions.forEach((el, index) => {
       if (config.captionsBack && config.captionsBack[index]) {
         el.innerText = config.captionsBack[index];
+      } else if (defaultConfig.captionsBack && defaultConfig.captionsBack[index]) {
+        el.innerText = defaultConfig.captionsBack[index];
       }
     });
 
@@ -817,7 +820,7 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.innerHTML = `
           <div class="overlay-card">
             <img src="${img.src}" alt="Zoomed">
-            <p class="overlay-caption">${container.querySelector('.card-caption').innerText}</p>
+            ${container.querySelector('.card-caption') ? `<p class="overlay-caption">${container.querySelector('.card-caption').innerText}</p>` : ''}
             <span class="close-overlay">✕ Close</span>
           </div>
         `;
