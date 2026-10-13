@@ -242,6 +242,39 @@ document.addEventListener('DOMContentLoaded', () => {
   // Set up background music path safely
   bgMusic.src = "Gulbahar _ গুলবাহার _ Ishaan এর Gaan _ Shuvendu Das Shuvo _ Official Music Video.mp3";
 
+  // Mascot Elements & State
+  const aluContainer = document.getElementById('alu-container');
+  const aluBubble = document.getElementById('alu-bubble');
+  let isGiftUnwrapped = false;
+  let bubbleTimeout = null;
+
+  // Flappy Bird Audio Elements & State
+  const flappyTheme = document.getElementById('flappy-theme') || new Audio('flappy bird theme.m4a');
+  const flappyCollision = document.getElementById('flappy-collision') || new Audio('collision.mp4');
+  const flappyCollisionVideo = document.getElementById('flappy-collision-video');
+  if (flappyTheme) {
+    flappyTheme.volume = 0.45;
+  }
+  if (flappyCollision) {
+    flappyCollision.volume = 0.7;
+  }
+  let wasBgMusicPlayingBeforeFlappy = false;
+
+  function playFlappyCollisionSound() {
+    if (flappyCollision) {
+      flappyCollision.currentTime = 0;
+      flappyCollision.play().catch(() => {
+        if (flappyCollisionVideo) {
+          flappyCollisionVideo.currentTime = 0;
+          flappyCollisionVideo.play().catch(() => {});
+        }
+      });
+    } else if (flappyCollisionVideo) {
+      flappyCollisionVideo.currentTime = 0;
+      flappyCollisionVideo.play().catch(() => {});
+    }
+  }
+
   // INJECT DYNAMIC BALLOON CSS ANIMATION
   const styleSheet = document.createElement("style");
   styleSheet.type = "text/css";
@@ -320,6 +353,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 1. UNLOCK PAGE & AUDIO TRIGGER ---
   unlockBtn.addEventListener('click', () => {
+    isGiftUnwrapped = true;
+
+    // Dismiss initial cover bubble when unwrap gift is clicked
+    if (aluBubble) {
+      aluBubble.classList.remove('reveal');
+      if (bubbleTimeout) clearTimeout(bubbleTimeout);
+    }
+
     // Play music (Required user interaction for mobile browsers)
     playMusic();
 
@@ -1041,6 +1082,29 @@ document.addEventListener('DOMContentLoaded', () => {
     gameOverOverlay.classList.add('hidden');
     gameWinOverlay.classList.add('hidden');
     
+    // Stop any ringing collision sound
+    if (flappyCollision) {
+      flappyCollision.pause();
+      flappyCollision.currentTime = 0;
+    }
+    if (flappyCollisionVideo) {
+      flappyCollisionVideo.pause();
+      flappyCollisionVideo.currentTime = 0;
+    }
+
+    // Pause main background music while playing Flappy Bird
+    if (bgMusic && !bgMusic.paused) {
+      wasBgMusicPlayingBeforeFlappy = true;
+      bgMusic.pause();
+    }
+
+    // Play Flappy Bird Theme
+    if (flappyTheme) {
+      flappyTheme.currentTime = 0;
+      flappyTheme.volume = 0.45;
+      flappyTheme.play().catch(err => console.log("Flappy theme play error:", err));
+    }
+
     if (gameLoopId) cancelAnimationFrame(gameLoopId);
     gameLoop();
   }
@@ -1461,6 +1525,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function triggerGameOver() {
     gameMode = 'gameover';
     cancelAnimationFrame(gameLoopId);
+
+    // Stop Flappy Bird theme
+    if (flappyTheme) {
+      flappyTheme.pause();
+      flappyTheme.currentTime = 0;
+    }
+
+    // Play collision sound effect immediately
+    playFlappyCollisionSound();
+
     gameOverOverlay.classList.remove('hidden');
   }
 
@@ -1473,6 +1547,19 @@ document.addEventListener('DOMContentLoaded', () => {
   function triggerGameWin() {
     gameMode = 'win';
     cancelAnimationFrame(gameLoopId);
+
+    // Stop Flappy Bird theme
+    if (flappyTheme) {
+      flappyTheme.pause();
+      flappyTheme.currentTime = 0;
+    }
+
+    // Resume main background music if it was playing before Flappy
+    if (wasBgMusicPlayingBeforeFlappy && musicBtn && musicBtn.classList.contains('playing')) {
+      bgMusic.play().catch(() => {});
+      wasBgMusicPlayingBeforeFlappy = false;
+    }
+
     gameWinOverlay.classList.remove('hidden');
     triggerConfetti(6);
     
@@ -1623,6 +1710,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof updateAluForSection === 'function') {
           updateAluForSection(id);
         }
+
+        // Handle leaving or being outside of game section
+        if (id !== 'game-sec') {
+          if (flappyTheme && !flappyTheme.paused) {
+            flappyTheme.pause();
+          }
+          if (wasBgMusicPlayingBeforeFlappy && bgMusic && bgMusic.paused && musicBtn && musicBtn.classList.contains('playing') && !birthdayMusicPlaying) {
+            bgMusic.play().catch(() => {});
+            wasBgMusicPlayingBeforeFlappy = false;
+          }
+        }
       }
     });
   }, observerOptions);
@@ -1648,12 +1746,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- 15. INTERACTIVE MASCOT "ALU" THE BEAR ---
-  const aluContainer = document.getElementById('alu-container');
-  const aluBubble = document.getElementById('alu-bubble');
-  
   let aluCurrentSection = 'cover-page';
   let aluIsSad = false;
-  let bubbleTimeout = null;
   let restoreTimeout = null;
 
   const aluMessages = {
@@ -1690,15 +1784,18 @@ document.addEventListener('DOMContentLoaded', () => {
     "আউচ! ব্যথা লেগেছে! আর মেরো না! 😭"
   ];
 
-  function showAluBubble(text, duration = 2500) {
+  function showAluBubble(text, duration = 5000) {
     if (bubbleTimeout) clearTimeout(bubbleTimeout);
+    if (!aluBubble) return;
     aluBubble.innerText = text;
     aluBubble.classList.add('reveal');
     
-    // Auto-hide bubble after duration (2.5 seconds)
-    bubbleTimeout = setTimeout(() => {
-      aluBubble.classList.remove('reveal');
-    }, duration);
+    // Auto-hide bubble after duration if duration > 0 (0 = stay on screen indefinitely)
+    if (duration > 0) {
+      bubbleTimeout = setTimeout(() => {
+        aluBubble.classList.remove('reveal');
+      }, duration);
+    }
   }
 
   window.updateAluForSection = function(sectionId) {
@@ -1718,8 +1815,13 @@ document.addEventListener('DOMContentLoaded', () => {
       aluContainer.classList.add(`state-${config.emote}`);
     }
     
-    // Display speech bubble
-    showAluBubble(config.text);
+    // Display speech bubble:
+    // If on cover page and gift is not yet unwrapped, keep on screen permanently until unwrap button is clicked
+    if (!isGiftUnwrapped && sectionId === 'cover-page') {
+      showAluBubble(config.text, 0); // No auto-hide, stays until unwrap gift clicked!
+    } else {
+      showAluBubble(config.text, 5000); // 5 seconds on screen
+    }
   };
 
   // Handle hit reaction
@@ -1739,22 +1841,24 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Say crying message
       const randomCry = cryingPhrases[Math.floor(Math.random() * cryingPhrases.length)];
-      aluBubble.innerText = randomCry;
-      aluBubble.classList.add('reveal');
+      if (aluBubble) {
+        aluBubble.innerText = randomCry;
+        aluBubble.classList.add('reveal');
+      }
 
       // Clear hit animation class after animation ends (400ms)
       setTimeout(() => {
         aluContainer.classList.remove('hit-shake');
       }, 400);
 
-      // Restore normal state after 2.5s
+      // Restore normal state after 5s
       restoreTimeout = setTimeout(() => {
         aluIsSad = false;
-        aluBubble.classList.remove('reveal');
+        if (aluBubble) aluBubble.classList.remove('reveal');
         setTimeout(() => {
           window.updateAluForSection(aluCurrentSection);
         }, 300);
-      }, 2500);
+      }, 5000);
     });
   }
 
