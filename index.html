@@ -456,22 +456,39 @@
             <div id="game-win-overlay" class="game-overlay hidden">
               <div class="washi-tape top-center-tape-pink"></div>
               <h4>✨ YOU WIN! ✨</h4>
-              <p>Happy 20th Birthday! You've unlocked your gift. Scratch below to reveal it! 👇</p>
+              <p id="win-desc">Happy 20th Birthday! You've unlocked your gift. Scratch or tap below to claim it! 👇</p>
               
               <!-- Gift Scratch Box Embedded -->
               <div class="scratch-card-container">
                 <!-- Revealed Card Underneath -->
-                <div class="voucher-card">
-                  <div class="voucher-header">🎁 BIRTHDAY VOUCHER 🎁</div>
+                <div class="voucher-card golden-ticket">
+                  <div class="voucher-header">👑 20TH BIRTHDAY VIP PASS 👑</div>
                   <div class="voucher-body">
-                    <h4 class="voucher-title">A Day of Spoiling 👑</h4>
-                    <p class="voucher-desc">This voucher entitles **Koninika** to a complete day of whatever she wishes! A candlelit dinner, unlimited shopping, and infinite warm hugs. 🍽️🛍️🫂</p>
-                    <div class="voucher-seal">VALID FOREVER • SIGNED WITH LOVE ❤️</div>
+                    <h4 class="voucher-title">The Infinite Wish Pass ✨</h4>
+                    <div class="voucher-perks">
+                      <div class="perk-item">🌟 <strong>1 Unconditional Wish</strong> — Anything in the universe, granted!</div>
+                      <div class="perk-item">🍽️ <strong>Royal Dinner Date & Desserts</strong> — All your favorite foods on me</div>
+                      <div class="perk-item">🛍️ <strong>Queen's Spoiling Spree</strong> — Unlimited shopping & pampering</div>
+                      <div class="perk-item">🫂 <strong>Lifetime Tantrum Pass</strong> — Instant cuddles, zero arguments</div>
+                    </div>
+                    <div class="voucher-seal">★ TICKET #KONU-20 • VALID FOR A LIFETIME ❤️ ★</div>
+                  </div>
+                  <div class="voucher-collected-badge hidden" id="voucher-collected-badge">
+                    ✅ CLAIMED & SAVED IN HEART
                   </div>
                 </div>
 
                 <!-- Scratch canvas on top -->
                 <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
+              </div>
+
+              <!-- Claim Button (visible before collecting) -->
+              <button id="game-claim-btn" class="pulse-btn claim-btn">🎁 COLLECT GIFT</button>
+
+              <!-- Action Buttons (visible after collecting) -->
+              <div id="win-action-buttons" class="win-action-btns hidden">
+                <button id="game-continue-btn" class="pulse-btn continue-btn">▶ CONTINUE FLYING (ENDLESS) 🚀</button>
+                <button id="game-win-restart-btn" class="secondary-btn win-restart-btn">🔄 RESTART GAME</button>
               </div>
             </div>
 
@@ -479,8 +496,11 @@
             <div id="game-over-overlay" class="game-overlay hidden">
               <div class="washi-tape top-center-tape-pink"></div>
               <h4>Oops! 🌧️</h4>
-              <p>You bumped into an instrument! Don't worry, try again.</p>
-              <button id="game-restart-btn" class="pulse-btn">TRY AGAIN</button>
+              <p id="game-over-msg">You bumped into an instrument! Don't worry, try again.</p>
+              <div class="game-over-btns" style="display: flex; flex-direction: column; width: 100%; max-width: 250px; gap: 8px;">
+                <button id="game-restart-btn" class="pulse-btn" style="width: 100%;">🔄 TRY AGAIN</button>
+                <button id="game-view-gift-btn" class="secondary-btn hidden" style="width: 100%;">🎁 VIEW MY GIFT</button>
+              </div>
             </div>
           </div>
         </section>
