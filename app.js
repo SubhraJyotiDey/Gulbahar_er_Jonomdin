@@ -232,19 +232,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameOverOverlay = document.getElementById('game-over-overlay');
   const gameStartBtn = document.getElementById('game-start-btn');
   const gameRestartBtn = document.getElementById('game-restart-btn');
-  const gameClaimBtn = document.getElementById('game-claim-btn');
   const gameContinueBtn = document.getElementById('game-continue-btn');
   const gameWinRestartBtn = document.getElementById('game-win-restart-btn');
   const gameViewGiftBtn = document.getElementById('game-view-gift-btn');
+  const memeDismissBtn = document.getElementById('meme-dismiss-btn');
+  const memeImageContainer = document.getElementById('meme-image-container');
   
   // Game & Gift States
   let giftCollected = false;
   let endlessMode = false;
   let isWinScreenShown = false;
-  
-  // Scratch Card Elements
-  const scratchCanvas = document.getElementById('scratch-canvas');
-  const scrCtx = scratchCanvas ? scratchCanvas.getContext('2d') : null;
 
   // Love Jar Elements (if present)
   const loveJar = document.getElementById('love-jar');
@@ -1086,6 +1083,7 @@ document.addEventListener('DOMContentLoaded', () => {
     itemTimer = 0;
     firstTapMade = false;
     isWinScreenShown = false;
+    endlessMode = false;
   }
 
   function startGame() {
@@ -1551,7 +1549,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const gameOverMsg = document.getElementById('game-over-msg');
     if (gameOverMsg) {
       if (endlessMode || giftCollected) {
-        gameOverMsg.innerHTML = `Great flight! Your Endless Score: <strong>${score}</strong>! 🏆<br><span style="color:#e91e63;font-size:0.75rem;font-weight:600;">(Your 20th Birthday VIP Pass is safe in your pocket! 🎁)</span>`;
+        gameOverMsg.innerHTML = `Great flight! Your Endless Score: <strong>${score}</strong>! 🏆<br><span style="color:#e91e63;font-size:0.75rem;font-weight:600;">(Your birthday surprise is unlocked! 🎁)</span>`;
       } else {
         gameOverMsg.innerText = "You bumped into an instrument! Don't worry, try again.";
       }
@@ -1569,8 +1567,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function checkWinCondition() {
-    // Only interrupt with gift win overlay if gift hasn't been collected yet and win screen hasn't shown
-    if (score >= 20 && !giftCollected && !isWinScreenShown) {
+    // Show win overlay when player hits score 20
+    if (score >= 20 && !endlessMode && !isWinScreenShown) {
       isWinScreenShown = true;
       triggerGameWin();
     }
@@ -1583,54 +1581,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // Stop Flappy Bird theme
     if (flappyTheme) {
       flappyTheme.pause();
-      flappyTheme.currentTime = 0;
     }
 
-    gameWinOverlay.classList.remove('hidden');
-    triggerConfetti(6);
+    // Play collision sound effect once as requested
+    playFlappyCollisionSound();
+
+    // Ensure meme modal and dismiss button are shown
+    if (memeImageContainer) memeImageContainer.classList.remove('hidden');
+    if (memeDismissBtn) memeDismissBtn.classList.remove('hidden');
     
-    // Initialize Scratch Card Gift Voucher!
-    setTimeout(initScratchCard, 400);
-  }
-
-  // --- 12. GIFT COLLECTION & ENDLESS MODE MECHANICS ---
-  function collectGift() {
-    if (giftCollected) return;
-    giftCollected = true;
-    endlessMode = true;
-
-    // Dissolve scratch canvas
-    if (scratchCanvas) {
-      scratchCanvas.style.opacity = '0';
-      setTimeout(() => {
-        scratchCanvas.style.display = 'none';
-      }, 350);
-    }
-
-    // Show stamped badge on VIP pass
-    const badge = document.getElementById('voucher-collected-badge');
-    if (badge) badge.classList.remove('hidden');
-
-    // Hide claim button
-    if (gameClaimBtn) gameClaimBtn.classList.add('hidden');
-
-    // Reveal action buttons (Continue Endless and Restart)
     const actionBtns = document.getElementById('win-action-buttons');
     if (actionBtns) actionBtns.classList.remove('hidden');
 
-    // Update win subtitle
-    const winDesc = document.getElementById('win-desc');
-    if (winDesc) {
-      winDesc.innerHTML = "🎉 <strong>Gift Collected!</strong> Your VIP Friendship Pass is saved! Keep flying endlessly or restart from score 0!";
-    }
+    gameWinOverlay.classList.remove('hidden');
+    triggerConfetti(6);
+  }
+
+  // --- 12. MEME GIFT DISMISSAL & ENDLESS MODE MECHANICS ---
+  function dismissMemeGift() {
+    giftCollected = true;
+    endlessMode = true;
+
+    // Remove the meme image and the remove button
+    if (memeImageContainer) memeImageContainer.classList.add('hidden');
+    if (memeDismissBtn) memeDismissBtn.classList.add('hidden');
+
+    // Ensure action buttons (Continue Endless and Restart) are prominently visible
+    const actionBtns = document.getElementById('win-action-buttons');
+    if (actionBtns) actionBtns.classList.remove('hidden');
 
     // Show View Gift button in Game Over screen for future crashes
     if (gameViewGiftBtn) gameViewGiftBtn.classList.remove('hidden');
-
-    triggerConfetti(5);
   }
 
   function continueGameEndless() {
+    giftCollected = true;
+    endlessMode = true;
     gameWinOverlay.classList.add('hidden');
     gameMode = 'playing';
     firstTapMade = true;
@@ -1655,115 +1641,9 @@ document.addEventListener('DOMContentLoaded', () => {
     gameLoop();
   }
 
-  function initScratchCard() {
-    if (giftCollected) {
-      if (scratchCanvas) scratchCanvas.style.display = 'none';
-      const badge = document.getElementById('voucher-collected-badge');
-      if (badge) badge.classList.remove('hidden');
-      if (gameClaimBtn) gameClaimBtn.classList.add('hidden');
-      const actionBtns = document.getElementById('win-action-buttons');
-      if (actionBtns) actionBtns.classList.remove('hidden');
-      return;
-    }
-
-    if (!scratchCanvas || !scrCtx) return;
-    scratchCanvas.style.display = 'block';
-    scratchCanvas.style.opacity = '1';
-    scratchCanvas.width = 290;
-    scratchCanvas.height = 195;
-
-    // Draw silver coating cover
-    const grad = scrCtx.createLinearGradient(0, 0, scratchCanvas.width, scratchCanvas.height);
-    grad.addColorStop(0, '#d1d5db');
-    grad.addColorStop(0.5, '#f3f4f6');
-    grad.addColorStop(1, '#9ca3af');
-    scrCtx.fillStyle = grad;
-    scrCtx.fillRect(0, 0, scratchCanvas.width, scratchCanvas.height);
-
-    // Draw scratch instructions
-    scrCtx.font = "bold 15px 'Fredoka', sans-serif";
-    scrCtx.fillStyle = "#1f2937";
-    scrCtx.textAlign = "center";
-    scrCtx.textBaseline = "middle";
-    scrCtx.fillText("✨ SCRATCH WITH FINGER ✨", scratchCanvas.width / 2, scratchCanvas.height / 2 - 12);
-    
-    scrCtx.font = "bold 11px 'Playpen Sans', sans-serif";
-    scrCtx.fillStyle = "#4b5563";
-    scrCtx.fillText("🎁 Reveal your 20th Birthday VIP Pass!", scratchCanvas.width / 2, scratchCanvas.height / 2 + 14);
-
-    let isDrawing = false;
-    
-    function scratch(x, y) {
-      scrCtx.save();
-      scrCtx.globalCompositeOperation = 'destination-out';
-      scrCtx.beginPath();
-      scrCtx.arc(x, y, 22, 0, Math.PI * 2);
-      scrCtx.fill();
-      scrCtx.restore();
-      
-      checkScratchPercentage();
-    }
-
-    // Touch and mouse listeners for canvas scratching
-    scratchCanvas.onmousedown = (e) => {
-      isDrawing = true;
-      const rect = scratchCanvas.getBoundingClientRect();
-      scratch(e.clientX - rect.left, e.clientY - rect.top);
-    };
-
-    scratchCanvas.onmousemove = (e) => {
-      if (!isDrawing) return;
-      const rect = scratchCanvas.getBoundingClientRect();
-      scratch(e.clientX - rect.left, e.clientY - rect.top);
-    };
-
-    window.onmouseup = () => { isDrawing = false; };
-
-    scratchCanvas.ontouchstart = (e) => {
-      isDrawing = true;
-      const rect = scratchCanvas.getBoundingClientRect();
-      const touch = e.touches[0];
-      if (touch) {
-        scratch(touch.clientX - rect.left, touch.clientY - rect.top);
-      }
-    };
-
-    scratchCanvas.ontouchmove = (e) => {
-      e.preventDefault();
-      if (!isDrawing) return;
-      const rect = scratchCanvas.getBoundingClientRect();
-      const touch = e.touches[0];
-      if (touch) {
-        scratch(touch.clientX - rect.left, touch.clientY - rect.top);
-      }
-    };
-
-    scratchCanvas.ontouchend = () => { isDrawing = false; };
-  }
-
-  function checkScratchPercentage() {
-    if (giftCollected || !scrCtx) return;
-    const imgData = scrCtx.getImageData(0, 0, scratchCanvas.width, scratchCanvas.height);
-    const pixels = imgData.data;
-    let transparent = 0;
-    
-    // Read every 16th pixel to calculate percentage efficiently
-    for (let i = 0; i < pixels.length; i += 64) {
-      if (pixels[i + 3] === 0) {
-        transparent++;
-      }
-    }
-
-    const percent = (transparent / (pixels.length / 64)) * 100;
-    
-    if (percent > 45) {
-      collectGift();
-    }
-  }
-
   // Hook up button event listeners
-  if (gameClaimBtn) {
-    gameClaimBtn.addEventListener('click', collectGift);
+  if (memeDismissBtn) {
+    memeDismissBtn.addEventListener('click', dismissMemeGift);
   }
   if (gameContinueBtn) {
     gameContinueBtn.addEventListener('click', continueGameEndless);
@@ -1777,7 +1657,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (gameViewGiftBtn) {
     gameViewGiftBtn.addEventListener('click', () => {
       gameOverOverlay.classList.add('hidden');
-      initScratchCard();
+      if (memeImageContainer) memeImageContainer.classList.remove('hidden');
+      if (memeDismissBtn) memeDismissBtn.classList.remove('hidden');
+      const actionBtns = document.getElementById('win-action-buttons');
+      if (actionBtns) actionBtns.classList.remove('hidden');
+      playFlappyCollisionSound();
       gameWinOverlay.classList.remove('hidden');
     });
   }
