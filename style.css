@@ -1319,156 +1319,80 @@ body {
   box-shadow: 2px 2px 0 var(--text-dark);
 }
 
-/* Win Screen Scratch Card Container overrides */
+/* Win Screen Overlay (Birthday Meme Gift Modal) */
 #game-win-overlay {
-  background-color: rgba(46, 63, 230, 0.96);
+  background-color: rgba(20, 20, 35, 0.95);
+  backdrop-filter: blur(4px);
   color: var(--cream-white);
-  padding: 14px 16px;
+  padding: 12px 14px;
   overflow-y: auto;
   max-height: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
 }
 
-#game-win-overlay h4 {
-  color: var(--bright-yellow);
-  text-shadow: 2px 2px 0 var(--neon-pink);
-  margin-bottom: 4px;
-}
-
-#game-win-overlay p {
-  color: var(--cream-white);
-  font-size: 0.74rem;
-  margin-bottom: 8px;
+.modal-top-bar {
+  width: 100%;
   max-width: 290px;
-}
-
-/* SCRATCH CARD VIRTUAL GIFT */
-.scratch-card-container {
-  position: relative;
-  width: 290px;
-  height: 195px;
-  border-radius: 14px;
-  border: 3px solid var(--text-dark);
-  box-shadow: 4px 4px 0 var(--bright-yellow);
-  overflow: hidden;
-  background-color: var(--cream-white);
-  margin-bottom: 4px;
-}
-
-.voucher-card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 40%, #fde68a 70%, #fcd34d 100%);
-  border: 2px dashed #d97706;
-  padding: 8px 10px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  border-radius: 10px;
-  box-sizing: border-box;
+  justify-content: flex-end;
+  margin-bottom: 6px;
 }
 
-.voucher-header {
-  font-family: var(--font-fun);
-  font-size: 0.68rem;
-  font-weight: 800;
-  color: #fff;
-  background: linear-gradient(90deg, #d97706, #b45309);
-  border: 1.5px solid #78350f;
-  padding: 2px 10px;
-  border-radius: 10px;
-  box-shadow: 1.5px 1.5px 0 #78350f;
-  letter-spacing: 0.5px;
-}
-
-.voucher-body {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.voucher-title {
-  font-family: var(--font-fun);
-  font-size: 0.88rem;
-  color: #78350f;
-  margin: 2px 0 4px 0;
-  font-weight: 800;
-}
-
-.voucher-perks {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  width: 100%;
-  text-align: left;
-}
-
-.perk-item {
-  font-size: 0.58rem;
-  line-height: 1.25;
-  color: #451a03;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.78);
-  padding: 2px 6px;
-  border-radius: 5px;
-  border-left: 3px solid #d97706;
-}
-
-.voucher-seal {
-  font-family: var(--font-fun);
-  font-size: 0.54rem;
-  font-weight: 700;
-  color: #92400e;
-  letter-spacing: 0.4px;
-  margin-top: 3px;
-}
-
-.voucher-collected-badge {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-6deg);
-  background: rgba(16, 185, 129, 0.95);
+.modal-close-pill {
+  background: #ff4d6d;
   color: #ffffff;
+  border: 2px solid var(--text-dark);
+  border-radius: 20px;
+  padding: 4px 12px;
   font-family: var(--font-fun);
-  font-size: 0.78rem;
-  font-weight: 800;
-  padding: 6px 14px;
-  border-radius: 8px;
-  border: 2px solid #064e3b;
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.25);
-  z-index: 6;
-  pointer-events: none;
-  white-space: nowrap;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--text-dark);
+  transition: transform 0.1s ease, background 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.modal-close-pill:hover,
+.modal-close-pill:active {
+  transform: translate(1px, 1px);
+  background: #e63956;
+  box-shadow: 1px 1px 0 var(--text-dark);
+}
+
+.modal-close-pill.hidden {
+  display: none !important;
+}
+
+.gift-meme-container {
+  width: 100%;
+  max-width: 290px;
+  aspect-ratio: 3 / 2;
+  border: 3.5px solid var(--text-dark);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 4px 4px 0 var(--bright-yellow);
+  background-color: #000;
+  margin-bottom: 8px;
   animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.voucher-collected-badge.hidden {
+.gift-meme-container.hidden {
   display: none !important;
 }
 
-.claim-btn {
-  margin-top: 8px !important;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-  color: white !important;
-  font-size: 0.82rem !important;
-  padding: 8px 18px !important;
-  border: 2px solid var(--text-dark) !important;
-  box-shadow: 2.5px 2.5px 0 var(--text-dark) !important;
-  border-radius: 12px !important;
-  cursor: pointer;
+.gift-meme-img {
   width: 100%;
-  max-width: 290px;
-}
-
-.claim-btn.hidden {
-  display: none !important;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .win-action-btns {
@@ -2176,6 +2100,14 @@ body {
   margin-bottom: 2px;
 }
 
+.nav-svg {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 2px;
+  fill: currentColor;
+  transition: transform 0.25s var(--spring-bounce);
+}
+
 .nav-item label {
   font-family: var(--font-fun);
   font-size: 0.65rem;
@@ -2189,8 +2121,10 @@ body {
   color: var(--neon-pink);
 }
 
-.nav-item.active span {
-  filter: drop-shadow(0 2px 4px rgba(255, 26, 117, 0.3));
+.nav-item.active span,
+.nav-item.active .nav-svg {
+  filter: drop-shadow(0 2px 4px rgba(255, 26, 117, 0.4));
+  transform: scale(1.08);
 }
 
 /* Individual Font-Family Overrides for Every Line & Section */

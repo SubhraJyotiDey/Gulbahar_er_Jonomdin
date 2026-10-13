@@ -1866,46 +1866,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- 15. INTERACTIVE MASCOT "ALU" THE BEAR ---
+  // --- 15. INTERACTIVE MASCOT "ALU" THE BEAR (KNOWLEDGEABLE GUIDE) ---
   let aluCurrentSection = 'cover-page';
-  let aluIsSad = false;
+  let aluIsInteracting = false;
   let restoreTimeout = null;
+  let factIndex = 0;
 
   const aluMessages = {
     'cover-page': {
-      text: "হাই কোণিনিকা! আমি আলু 🐻 গিফটটা খোলো জলদি! 🎁",
-      emote: 'happy'
+      text: "হাই কোণিনিকা! আমি আলু 🐻 জানো কি? ২০ বছর বয়স মানে পৃথিবী সূর্যের চারপাশে প্রায় ১৮.৭ বিলিয়ন কিমি ভ্রমণ করে ফেলেছে! গিফটটা আনর‍্যাপ করো! 🌍📚",
+      emote: 'thinking'
     },
     'countdown-sec': {
-      text: "কাউন্টডাউন শুরু হয়ে গেছে! আর মাত্র কয়েক দিন! 🕒",
+      text: "সময় হলো স্থান-কালের (Spacetime) একটি অবিচ্ছেদ্য মাত্রা! আইনস্টাইনের রিলেটিভিটি অনুযায়ী সময় কারো জন্য থামে না—আর অল্প কিছু দিন পরেই তোমার ২০ পূর্ণ! ⏳🕒",
       emote: 'thinking'
     },
     'scrapbook-sec': {
-      text: "আমাদের মিষ্টি সব মুহূর্ত আর ছবি! দেখে নাও! 💖",
-      emote: 'heart'
+      text: "ফটোগ্রাফি হলো আলো ও ফোটন কণা সংরক্ষণের বিজ্ঞান! লেন্সের আলো সেন্সরে অপটিক্যাল ডেটা হয়ে ইতিহাসকে অমর করে রাখে! 📷🔬",
+      emote: 'thinking'
     },
     'game-sec': {
-      text: "চলো খেলি! ট্যাপ করে আমাকে ওড়াও! খুব সহজ! 🎮",
+      text: "ফিজিক্স চ্যালেঞ্জ: অভিকর্ষজ ত্বরণ g = 9.8 m/s²! স্ক্রিনে ট্যাপ করে ভেলোসিটি আর প্যারাবলিক ট্র্যাজেক্টরি ব্যালেন্স করে স্কোর ২০ করো! 🎮⚡",
       emote: 'gamer'
     },
     'cake-sec': {
-      text: "ফুঁ দিয়ে বা ট্যাপ করে মোমবাতিগুলো নেভাও! 🎂",
-      emote: 'happy'
+      text: "মোমবাতির শিখায় রয়েছে উত্তপ্ত আয়ন ও প্লাজমা! বাতাসে ফুঁ দিলে তাপমাত্রা ইগনিশন পয়েন্টের নিচে নেমে দহন প্রক্রিয়া বন্ধ হয়ে যায়! 🎂🔬",
+      emote: 'thinking'
     },
     'sweets-revealed': {
-      text: "মোমবাতি নিভে গেছে! মিষ্টিমুখ হয়ে যাক! 😋🍛",
-      emote: 'gamer'
+      text: "মিষ্টি বা গ্লুকোজ গ্রহণ করলে মস্তিষ্কে ডোপামিন ও সেরোটোনিন ক্ষরিত হয়, যা স্নায়ুতন্ত্রকে তাত্ক্ষণিক আনন্দ ও শক্তি যোগায়! 😋🧪",
+      emote: 'happy'
     }
   };
 
-  const cryingPhrases = [
-    "আউচ! মারলে কেন? আমি আলু ভর্তা নাকি! 😭",
-    "ব্যথা পেয়েছি! বার্থডে গার্ল এভাবে মারে? 😭",
-    "উউউ... মারলে কেন! আর কথা বলব না! 😭",
-    "আউচ! ব্যথা লেগেছে! আর মেরো না! 😭"
+  const aluKnowledgeFacts = [
+    "নিউটনের ৩য় সূত্র: প্রতিটি ক্রিয়ারই সমান ও বিপরীত প্রতিক্রিয়া আছে! কাইনেটিক এনার্জি সোজা মস্তিষ্কে গিয়ে নলেজ আনলক করল! 💡⚡",
+    "আলু ফ্যাক্ট: একটি সাধারণ আলুর মধ্যে থাকা ফসফরিক অ্যাসিড ও জিংক দিয়ে বিদ্যুৎ তৈরি করে ঘড়ি বা এলইডি জ্বালানো সম্ভব! 🥔⚡",
+    "সূর্যের আলো পৃথিবীতে পৌঁছাতে ৮ মিনিট ২০ সেকেন্ড সময় নেয়—অর্থাৎ আমরা আকাশে সবসময় সূর্যের অতীত রূপ দেখি! ☀️🔭",
+    "মানব মস্তিষ্ক মাত্র ২০ ওয়াট বিদ্যুৎ খরচে সেকেন্ডে লক্ষ কোটি স্নায়ুবিক হিসাব কষে ফেলে! 🧠⚡",
+    "আমাদের শরীরে থাকা প্রতিটি আয়রন ও ক্যালসিয়াম পরমাণু কোটি কোটি বছর আগে কোনো এক নক্ষত্রের সুপারনোভায় তৈরি হয়েছিল! আমরা সবাই স্টারডাস্ট! 🌟🧬",
+    "মহাবিশ্বে পৃথিবীর সমস্ত সমুদ্রসৈকতের মোট বালুকণার চেয়েও বেশি সংখ্যক নক্ষত্র রয়েছে—আনুমানিক ১০²² টি! 🌌🔭",
+    "মৌমাছিরা ‘Waggle Dance’ নামক বিশেষ নাচের মাধ্যমে অন্য মৌমাছিদের ফুলের সঠিক কোণ ও জ্যামিতিক দূরত্ব নির্দেশ করে! ন্যাচারাল জিপিএস! 🐝📐",
+    "শব্দের গতি বাতাসে ৩৪৩ মি./সে. হলেও কঠিন ইস্পাতে তা প্রায় ১৫ গুণ দ্রুত (৫,০০০+ মি./সে.) পরিবাহিত হয়! 🔊🚄",
+    "মানুষের শরীরের সমস্ত ডিএনএ সোজা করে মাপলে তা সূর্য থেকে প্লুটো পর্যন্ত গিয়ে আবার ফিরে আসতে পারবে! 🧬🌌",
+    "অক্টোপাসের ৩টি হৃদপিণ্ড, নীল রঙের রক্ত এবং প্রতিটি বাহুতেই আলাদা স্নায়ুবিক মস্তিষ্ক-কেন্দ্র থাকে! 🐙🔬"
   ];
 
-  function showAluBubble(text, duration = 5000) {
+  function showAluBubble(text, duration = 6000) {
     if (bubbleTimeout) clearTimeout(bubbleTimeout);
     if (!aluBubble) return;
     aluBubble.innerText = text;
@@ -1926,7 +1933,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     aluCurrentSection = sectionId;
-    if (aluIsSad) return; // Do not interrupt crying animation
+    if (aluIsInteracting) return; // Do not interrupt active knowledge interaction
 
     const config = aluMessages[sectionId] || aluMessages['cover-page'];
     
@@ -1941,29 +1948,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!isGiftUnwrapped && sectionId === 'cover-page') {
       showAluBubble(config.text, 0); // No auto-hide, stays until unwrap gift clicked!
     } else {
-      showAluBubble(config.text, 5000); // 5 seconds on screen
+      showAluBubble(config.text, 6000); // 6 seconds on screen for comfortable reading
     }
   };
 
-  // Handle hit reaction
+  // Handle tap on Alu - shares interesting knowledge facts!
   if (aluContainer) {
     aluContainer.addEventListener('click', (e) => {
       e.stopPropagation();
       
-      // Prevent double trigger of hit if already sad
-      if (aluIsSad) return;
-      aluIsSad = true;
-      
+      aluIsInteracting = true;
       if (bubbleTimeout) clearTimeout(bubbleTimeout);
       if (restoreTimeout) clearTimeout(restoreTimeout);
 
-      // Hit animation
-      aluContainer.className = 'hit-shake state-sad';
+      // Lively intellectual thinking animation
+      aluContainer.className = 'hit-shake state-thinking';
       
-      // Say crying message
-      const randomCry = cryingPhrases[Math.floor(Math.random() * cryingPhrases.length)];
+      // Cycle through knowledge facts
+      const fact = aluKnowledgeFacts[factIndex % aluKnowledgeFacts.length];
+      factIndex++;
+
       if (aluBubble) {
-        aluBubble.innerText = randomCry;
+        aluBubble.innerText = fact;
         aluBubble.classList.add('reveal');
       }
 
@@ -1972,14 +1978,14 @@ document.addEventListener('DOMContentLoaded', () => {
         aluContainer.classList.remove('hit-shake');
       }, 400);
 
-      // Restore normal state after 5s
+      // Restore normal section knowledge state after 6s
       restoreTimeout = setTimeout(() => {
-        aluIsSad = false;
+        aluIsInteracting = false;
         if (aluBubble) aluBubble.classList.remove('reveal');
         setTimeout(() => {
           window.updateAluForSection(aluCurrentSection);
         }, 300);
-      }, 5000);
+      }, 6000);
     });
   }
 
